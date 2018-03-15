@@ -3,37 +3,11 @@
  */
 //%
 enum GamerBitPin {
-    //% block="X button"
-    P1 = <number>DAL.MICROBIT_ID_IO_P1,
-    //% block="Y button"
-    P2 = <number>DAL.MICROBIT_ID_IO_P2,
-    //% block="D-PAD up"
+    //% block="Z button"
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
-    //% block="D-PAD down"
-    P13 = <number>DAL.MICROBIT_ID_IO_P13,
-    //% block="D-PAD left"
-    P14 = <number>DAL.MICROBIT_ID_IO_P14,
-    //% block="D-PAD right"
-    P15 = <number>DAL.MICROBIT_ID_IO_P15,
 }
 
-/**
- * Trigger Events Proposed by DFRobot gamer:bit Players.
- */
-//%
-enum GamerBitEvent {
-    //% block="pressed"
-    Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
-    //% block="released"
-    Up = DAL.MICROBIT_BUTTON_EVT_UP,
-    //% block="click"
-    Click = DAL.MICROBIT_BUTTON_EVT_CLICK,
-}
-
-/**
- * Functions for DFRobot gamer:bit Players.
- */
-//% weight=10 color=#DF6721 icon="\uf11b" block="gamePad"
+//% weight=10 color=#DF6721 icon="\uf11b" block="joystick"
 namespace gamePad {
     let PIN_INIT = 0;
     
