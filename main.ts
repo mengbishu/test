@@ -113,7 +113,7 @@ namespace joystick {
      * LED indicator light switch.
      */
     //% weight=20
-    //% blockId=joystick_led block="LED|%index|"
+    //% blockId=gamePad_led block="LED|%index|"
     //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
     export function led(index: Led): void {
         if (!PIN_INIT) { 
