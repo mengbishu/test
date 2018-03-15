@@ -18,6 +18,16 @@ namespace gamePad {
         V1 = 255,     
     }
 
+    export enum Intensity { 
+        //% blockId="I0" block="stop"
+        I0 = 0,
+        //% blockId="I1" block="weak"
+        I1 = 100,
+        //% blockId="I2" block="medium"
+        I2 = 180,
+        //% blockId="I3" block="strong"
+        I3 = 225
+    }
 
     export enum Led {
         //% blockId="OFF" block="off"
