@@ -27,7 +27,7 @@ namespace joystick {
     }
     
     //%
-    enum GamerBitEvent {
+    export enum GamerBitEvent {
         //% block="pressed"
         Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
         //% block="released"
