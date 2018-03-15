@@ -3,19 +3,56 @@
  */
 //%
 enum GamerBitPin {
-    //% block="Z button"
+    //% block="X button"
+    P1 = <number>DAL.MICROBIT_ID_IO_P1,
+    //% block="Y button"
+    P2 = <number>DAL.MICROBIT_ID_IO_P2,
+    //% block="D-PAD up"
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
+    //% block="D-PAD down"
+    P13 = <number>DAL.MICROBIT_ID_IO_P13,
+    //% block="D-PAD left"
+    P14 = <number>DAL.MICROBIT_ID_IO_P14,
+    //% block="D-PAD right"
+    P15 = <number>DAL.MICROBIT_ID_IO_P15,
 }
 
-namespace joystick { 
+/**
+ * Trigger Events Proposed by DFRobot gamer:bit Players.
+ */
+//%
+enum GamerBitEvent {
+    //% block="pressed"
+    Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
+    //% block="released"
+    Up = DAL.MICROBIT_BUTTON_EVT_UP,
+    //% block="click"
+    Click = DAL.MICROBIT_BUTTON_EVT_CLICK,
+}
 
+/**
+ * Functions for DFRobot gamer:bit Players.
+ */
+//% weight=10 color=#DF6721 icon="\uf11b" block="gamePad"
+namespace gamePad {
     let PIN_INIT = 0;
-
+    
     export enum Vibrator { 
         //% blockId="V0" block="stop"
         V0 = 0,
         //% blockId="V1" block="Vibration"
         V1 = 255,     
+    }
+
+    export enum Intensity { 
+        //% blockId="I0" block="stop"
+        I0 = 0,
+        //% blockId="I1" block="weak"
+        I1 = 100,
+        //% blockId="I2" block="medium"
+        I2 = 180,
+        //% blockId="I3" block="strong"
+        I3 = 225
     }
 
     export enum Led {
@@ -25,35 +62,32 @@ namespace joystick {
         ON = 1
     }
 
-    enum GamerBitEvent {
-        //% block="pressed"
-        Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
-        //% block="released"
-        Up = DAL.MICROBIT_BUTTON_EVT_UP,
-        //% block="click"
-        Click = DAL.MICROBIT_BUTTON_EVT_CLICK,
-    }
 
-    //% shim=joystick::init
-    function init(): void { 
+    //% shim=gamerpad::init
+    function init(): void {
         return;
     }
 
-    function PinInit(): void { 
+    function PinInit(): void {
         pins.setPull(DigitalPin.P1, PinPullMode.PullNone);
         pins.setPull(DigitalPin.P2, PinPullMode.PullNone);
         pins.setPull(DigitalPin.P8, PinPullMode.PullNone);
-        pins.setPull(DigitalPin.P5, PinPullMode.PullNone);
-        pins.setPull(DigitalPin.P11, PinPullMode.PullNone);
-        pins.setPull(DigitalPin.P16,  PinPullMode.PullUp);
+        pins.setPull(DigitalPin.P13, PinPullMode.PullNone);
+        pins.setPull(DigitalPin.P14, PinPullMode.PullNone);
+        pins.setPull(DigitalPin.P15, PinPullMode.PullNone);
+        pins.setPull(DigitalPin.P0, PinPullMode.PullUp);
+        pins.setPull(DigitalPin.P16, PinPullMode.PullUp);
         PIN_INIT = 1;
         return;
     }
 
+    /**
+     * To scan a button whether be triggered : return '1' if pressed; return'0' if not.
+     */
     //% weight=70
-    //% blockId=joystick_keyState block="button|%button|is pressed"
+    //% blockId=gamePad_keyState block="button|%button|is pressed"
     //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
-    function pressed(button: GamerBitPin): boolean { 
+    export function keyState(button: GamerBitPin): boolean {
         if (!PIN_INIT) { 
             PinInit();
         }
@@ -69,7 +103,7 @@ namespace joystick {
      */
     //% weight=60
     //% blockGap=50
-    //% blockId=joystick_onEvent block="on button|%button|is %event"
+    //% blockId=gamePad_onEvent block="on button|%button|is %event"
     //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
     //% event.fieldEditor="gridpicker" event.fieldOptions.columns=3
     export function onEvent(button: GamerBitPin, event: GamerBitEvent, handler: Action) {
@@ -80,12 +114,11 @@ namespace joystick {
         control.onEvent(<number>button, <number>event, handler); // register handler
     }
 
-
     /**
      * Vibrating motor switch.
      */
     //% weight=50
-    //% blockId=joystick_vibratorMotor block="Vibrator motor switch|%index|"
+    //% blockId=gamePad_vibratorMotor block="Vibrator motor switch|%index|"
     //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
     export function vibratorMotor(index: Vibrator): void {
         vibratorMotorSpeed(<number>index);
@@ -97,7 +130,7 @@ namespace joystick {
      */
     //% weight=30
     //% blockGap=50
-    //% blockId=joystick_vibratorMotorSpeed block="Vibrator motor intensity|%degree"
+    //% blockId=gamePad_vibratorMotorSpeed block="Vibrator motor intensity|%degree"
     //% degree.min=0 degree.max=255
     export function vibratorMotorSpeed(degree: number): void {
         if (!PIN_INIT) { 
@@ -112,7 +145,7 @@ namespace joystick {
      * LED indicator light switch.
      */
     //% weight=20
-    //% blockId=joystick_led block="LED|%index|"
+    //% blockId=gamePad_led block="LED|%index|"
     //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
     export function led(index: Led): void {
         if (!PIN_INIT) { 
