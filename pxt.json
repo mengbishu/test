@@ -9,7 +9,8 @@
     },
     "files": [
         "README.md",
-        "main.ts"
+        "main.ts",
+        "joystick.cpp"
     ],
     "testFiles": [
         "test.ts"

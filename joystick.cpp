@@ -1,7 +1,7 @@
 #include "pxt.h"
 
 using namespace pxt;
-namespace gamerpad {
+namespace joystick {
     bool initialized = false;
 
     //%
