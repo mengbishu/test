@@ -10,23 +10,12 @@ enum GamerBitPin {
 //% weight=10 color=#DF6721 icon="\uf11b" block="joystick"
 namespace gamePad {
     let PIN_INIT = 0;
-    
+
     export enum Vibrator { 
         //% blockId="V0" block="stop"
         V0 = 0,
         //% blockId="V1" block="Vibration"
         V1 = 255,     
-    }
-
-    export enum Intensity { 
-        //% blockId="I0" block="stop"
-        I0 = 0,
-        //% blockId="I1" block="weak"
-        I1 = 100,
-        //% blockId="I2" block="medium"
-        I2 = 180,
-        //% blockId="I3" block="strong"
-        I3 = 225
     }
 
     export enum Led {
@@ -36,12 +25,19 @@ namespace gamePad {
         ON = 1
     }
 
-
-    //% shim=joystick::init
-    function init(): void {
-        return;
+    enum GamerBitEvent {
+        //% block="pressed"
+        Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
+        //% block="released"
+        Up = DAL.MICROBIT_BUTTON_EVT_UP,
+        //% block="click"
+        Click = DAL.MICROBIT_BUTTON_EVT_CLICK,
     }
 
+    //% shim=joystick::init
+    function init(): void { 
+        return;
+    }
     function PinInit(): void {
         pins.setPull(DigitalPin.P1, PinPullMode.PullNone);
         pins.setPull(DigitalPin.P2, PinPullMode.PullNone);
