@@ -8,7 +8,7 @@ enum GamerBitPin {
 }
 
 //% weight=10 color=#DF6721 icon="\uf11b" block="joystick"
-namespace gamePad {
+namespace joystick {
     let PIN_INIT = 0;
     
     export enum Vibrator { 
