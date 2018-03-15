@@ -43,11 +43,8 @@ namespace joystick {
         //% blockId="I3" block="strong"
         I3 = 225
     }
-    
-    /**
-     * Trigger Events Proposed by DFRobot gamer:bit Players.
-     */
-    //%
+
+
     enum GamerBitEvent {
         //% block=mengbishu"pressed"
         Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
