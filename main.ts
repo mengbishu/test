@@ -40,7 +40,7 @@ namespace joystick {
         return;
     }
 
-    function PinInit(): void { 
+    export function PinInit(): void { 
         pins.setPull(DigitalPin.P1, PinPullMode.PullNone);
         pins.setPull(DigitalPin.P2, PinPullMode.PullNone);
         pins.setPull(DigitalPin.P8, PinPullMode.PullNone);
@@ -54,7 +54,7 @@ namespace joystick {
     //% weight=70
     //% blockId=joystick_keyState block="button|%button|is pressed"
     //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
-    function pressed(button: GamerBitPin): boolean { 
+    export function pressed(button: GamerBitPin): boolean { 
         if (!PIN_INIT) { 
             PinInit();
         }
