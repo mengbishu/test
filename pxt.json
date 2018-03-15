@@ -1,8 +1,8 @@
 {
-    "name": "test",
+    "name": "joystick",
     "version": "0.0.0",
-    "description": "test",
-    "license": "aa",
+    "description": "micronit",
+    "license": "MIT",
     "dependencies": {
         "core": "*",
         "radio": "*"

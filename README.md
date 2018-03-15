@@ -1,6 +1,6 @@
-# test
+# joystick
 
-test
+micronit
 
 ## TODO
 
@@ -15,7 +15,7 @@ Read more at https://makecode.microbit.org/packages/build-your-own
 
 ## License
 
-aa
+yes
 
 ## Supported targets
 
