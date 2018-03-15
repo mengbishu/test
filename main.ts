@@ -17,6 +17,18 @@ enum GamerBitPin {
     P15 = <number>DAL.MICROBIT_ID_IO_P15,
 }
 
+/**
+ * Trigger Events Proposed by DFRobot gamer:bit Players.
+ */
+//%
+enum GamerBitEvent {
+    //% block="pressed"
+    Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
+    //% block="released"
+    Up = DAL.MICROBIT_BUTTON_EVT_UP,
+    //% block="click"
+    Click = DAL.MICROBIT_BUTTON_EVT_CLICK,
+}
 
 /**
  * Functions for DFRobot gamer:bit Players.
@@ -43,15 +55,7 @@ namespace joystick {
         I3 = 225
     }
 
-    enum GamerBitEvent {
-        //% block="pressed"
-        Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
-        //% block="released"
-        Up = DAL.MICROBIT_BUTTON_EVT_UP,
-        //% block="click"
-        Click = DAL.MICROBIT_BUTTON_EVT_CLICK,
-    }
-
+    
     export enum Led {
         //% blockId="OFF" block="off"
         OFF = 0,
