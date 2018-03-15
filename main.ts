@@ -17,11 +17,6 @@ enum GamerBitPin {
     P15 = <number>DAL.MICROBIT_ID_IO_P15,
 }
 
-/**
- * Trigger Events Proposed by DFRobot gamer:bit Players.
- */
-//%
-
 
 /**
  * Functions for DFRobot gamer:bit Players.
