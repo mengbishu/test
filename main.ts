@@ -1,12 +1,11 @@
-/**
- * User Buttons for DFRobot gamer:bit Players.
- */
+
 //%
 enum joystickBitPin {
     //% block="Z button"
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
 }
 
+//% weight=10 color=#DF6721 icon="\uf11b" block="gamePad"
 namespace joystick { 
 
     let PIN_INIT = 0;
@@ -49,9 +48,7 @@ namespace joystick {
         return;
     }
 
-    /**
-     * To scan a button whether be triggered : return '1' if pressed; return'0' if not.
-     */
+  
     //% weight=70
     //% blockId=joystick_keyState block="button|%button|is pressed"
     //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
@@ -66,9 +63,7 @@ namespace joystick {
         return num;
     }
 
-    /**
-     * Registers code to run when a DFRobot gamer:bit event is detected.
-     */
+
     //% weight=60
     //% blockGap=50
     //% blockId=joystick_onEvent block="on button|%button|is %event"
@@ -83,9 +78,7 @@ namespace joystick {
     }
 
 
-   /**
-     * Vibrating motor switch.
-     */
+
     //% weight=50
     //% blockId=joystick_vibratorMotor block="Vibrator motor switch|%index|"
     //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
@@ -94,9 +87,7 @@ namespace joystick {
         return;
     }
 
-    /**
-     * Vibration motor speed setting, adjustable range 0~255.
-     */
+
     //% weight=30
     //% blockGap=50
     //% blockId=joystick_vibratorMotorSpeed block="Vibrator motor intensity|%degree"
@@ -110,9 +101,7 @@ namespace joystick {
         return;
     }
 
-    /**
-     * LED indicator light switch.
-     */
+
     //% weight=20
     //% blockId=joystick_led block="LED|%index|"
     //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
