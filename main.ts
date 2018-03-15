@@ -5,7 +5,7 @@ enum joystickBitPin {
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
 }
 
-//% weight=10 color=#DF6721 icon="\uf11b" block="gamePad"
+
 namespace joystick { 
 
     let PIN_INIT = 0;
