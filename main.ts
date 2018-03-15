@@ -1,8 +1,6 @@
-/**
- * User Buttons for DFRobot gamer:bit Players.
- */
+
 //%
-enum GamerBitPin {
+enum joystickBitPin {
     //% block="Z button"
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
 }
@@ -25,7 +23,7 @@ namespace joystick {
         ON = 1
     }
 
-    enum GamerBitEvent {
+    enum joystickBitEvent {
         //% block="pressed"
         Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
         //% block="released"
@@ -43,8 +41,7 @@ namespace joystick {
         pins.setPull(DigitalPin.P1, PinPullMode.PullNone);
         pins.setPull(DigitalPin.P2, PinPullMode.PullNone);
         pins.setPull(DigitalPin.P8, PinPullMode.PullNone);
-        pins.setPull(DigitalPin.P5, PinPullMode.PullNone);
-        pins.setPull(DigitalPin.P11, PinPullMode.PullNone);
+        pins.setPull(DigitalPin.P0,  PinPullMode.PullUp);
         pins.setPull(DigitalPin.P16,  PinPullMode.PullUp);
         PIN_INIT = 1;
         return;
@@ -53,7 +50,7 @@ namespace joystick {
     //% weight=70
     //% blockId=joystick_keyState block="button|%button|is pressed"
     //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
-    function pressed(button: GamerBitPin): boolean { 
+    function pressed(button: joystickBitPin): boolean { 
         if (!PIN_INIT) { 
             PinInit();
         }
@@ -64,15 +61,13 @@ namespace joystick {
         return num;
     }
 
-    /**
-     * Registers code to run when a DFRobot gamer:bit event is detected.
-     */
+
     //% weight=60
     //% blockGap=50
     //% blockId=joystick_onEvent block="on button|%button|is %event"
     //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
     //% event.fieldEditor="gridpicker" event.fieldOptions.columns=3
-    export function onEvent(button: GamerBitPin, event: GamerBitEvent, handler: Action) {
+    export function onEvent(button: joystickBitPin, event: joystickBitEvent, handler: Action) {
         init();
         if (!PIN_INIT) { 
             PinInit();
@@ -81,9 +76,7 @@ namespace joystick {
     }
 
 
-    /**
-     * Vibrating motor switch.
-     */
+
     //% weight=50
     //% blockId=joystick_vibratorMotor block="Vibrator motor switch|%index|"
     //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
@@ -108,9 +101,7 @@ namespace joystick {
         return;
     }
 
-    /**
-     * LED indicator light switch.
-     */
+
     //% weight=20
     //% blockId=joystick_led block="LED|%index|"
     //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
