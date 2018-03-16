@@ -124,7 +124,7 @@ namespace joystick {
     }
 
     export enum read { 
-        
+        //% block = 'x'
         value_x = pins.analogReadPin(AnalogPin.P1),
         //% block = 'y'
         value_y = pins.analogReadPin(AnalogPin.P2)
@@ -147,7 +147,7 @@ namespace joystick {
     }
     
     export enum compare{
-        //%a
+        //% block = '>'
         a = '>',
         //% block = '='
         b = '=',
@@ -161,7 +161,7 @@ namespace joystick {
      */
     //% weight=60
     //% blockGap=50
-    //% blockId=detect_XY block="a %read|m %compare|k %value"
+    //% blockId=detect_XY block=" %read| %compare| %value"
     //% value.min=-10 value.max=10
     export function detect(read: read, compare: compare, value: number): boolean { 
         if (compare == '>') { 
