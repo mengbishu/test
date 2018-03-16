@@ -44,7 +44,15 @@ namespace joystick {
     }
 
     
-  
+    export enum compare{
+       //% block='>'
+        a = '1',
+        //% block='='
+        b = '2',
+        //% block='<'
+        c = '3'
+    }
+
     //% shim=joystick::init
     function init(): void { 
         return;
