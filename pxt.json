@@ -10,7 +10,7 @@
     "files": [
         "README.md",
         "main.ts",
-        "joystick.cpp",
+        "gamerpad.cpp",
         "_locales/zh/joystick-strings.json"
     ],
     "testFiles": [
