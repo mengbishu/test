@@ -7,6 +7,11 @@ enum Z_Pin {
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
 }
 
+enum XY_Pin { 
+    P1 = <number>DAL.MICROBIT_ID_IO_P1,
+    P2 = <number>DAL.MICROBIT_ID_IO_P2
+}
+
 //% weight=10 color=#DF6721 icon="\uf11b" block="joystick"
 namespace joystick { 
 
@@ -38,9 +43,9 @@ namespace joystick {
 
     export enum read { 
         //% block='x'
-        value_x = pins.analogReadPin(AnalogPin.P1),
+        value_x = (pins.analogReadPin(AnalogPin.P1)-500)/50,
         //% block='y'
-        value_y = pins.analogReadPin(AnalogPin.P2)
+        value_y = (pins.analogReadPin(AnalogPin.P2)-500)/50
     }
 
     
@@ -127,16 +132,13 @@ namespace joystick {
         return;
     }
 
-
-    
-
     /**
      * Detect the analog value of the rocker.
      */
     //% weight=60
     //% blockGap=40
     //% blockId=detect block="joystick|%read_|%compare_|%value_"
-    //% value.min=-10 value.max=10
+    //% value_.min=-10 value_.max=10
     export function detect(read_: read, compare_: compare, value_: number): boolean { 
         if (compare_ == 1) { 
             if (read_ > value_) { 
@@ -156,7 +158,35 @@ namespace joystick {
         return false;
     }
     
+    /**
+     * Detect the analog value of the rocker.
+     */
+    //% weight=60
+    //% blockGap=40
+    //% blockId=action block="joystick on|%Pin|is shake"
+    export function shake(Pin: XY_Pin) { 
+        
+
+    }
+
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * LED indicator light switch.
      */
