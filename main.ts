@@ -36,6 +36,22 @@ namespace joystick {
         Click = DAL.MICROBIT_BUTTON_EVT_CLICK,
     }
 
+    export enum read { 
+        //% block='x'
+        value_x = pins.analogReadPin(AnalogPin.P1),
+        //% block='y'
+        value_y = pins.analogReadPin(AnalogPin.P2)
+    }
+
+    
+    export enum compare{
+       //% block='>'
+        a = '>',
+        //% block='='
+        b = '=',
+        //% block='<'
+        c = '<'
+    }
 
     //% shim=joystick::init
     function init(): void { 
@@ -121,8 +137,22 @@ namespace joystick {
     //% blockGap=40
     //% blockId=detect block="joystick|%read_|%compare_|%value_"
     //% value.min=-10 value.max=10
-    export function detect(read_: number, compare_: number, value_: number): boolean { 
-
+    export function detect(read_: read, compare_: compare, value_: number): boolean { 
+        if (compare_ == '>') { 
+            if (read_ > value_) { 
+                return true;
+            }
+        }
+        if (compare_ == '=') { 
+            if (read_ == value_) { 
+                return true;
+            }
+        }
+        if (compare_ == '<') { 
+            if (read_ < value_) { 
+                return true;
+            }
+        }
         return false;
     }
     
