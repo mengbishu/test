@@ -161,21 +161,21 @@ namespace joystick {
      */
     //% weight=60
     //% blockGap=40
-    //% blockId=detect block="joystick|b %read|a %compare|k %value"
+    //% blockId=detect block="joystick|%read_|%compare_|%value_"
     //% value.min=-10 value.max=10
-    export function detect(read: read, compare: compare, value: number): boolean { 
-        if (compare == '>') { 
-            if (read > value) { 
+    export function detect(read_: read, compare_: compare, value_: number): boolean { 
+        if (compare_ == '>') { 
+            if (read_ > value_) { 
                 return true;
             }
         }
-        if (compare == '=') { 
-            if (read == value) { 
+        if (compare_ == '=') { 
+            if (read_ == value_) { 
                 return true;
             }
         }
-        if (compare == '<') { 
-            if (read < value) { 
+        if (compare_ == '<') { 
+            if (read_ < value_) { 
                 return true;
             }
         }
