@@ -2,9 +2,14 @@
  * User Buttons for DFRobot gamer:bit Players.
  */
 //%
-enum GamerBitPin {
+enum Z_Pin {
     //% block="Z button"
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
+}
+
+enum XY_Pin { 
+    P1 = <number>DAL.MICROBIT_ID_IO_P1,
+    P2 = <number>DAL.MICROBIT_ID_IO_P2
 }
 
 //% weight=10 color=#DF6721 icon="\uf11b" block="joystick"
@@ -54,8 +59,8 @@ namespace joystick {
 
     //% weight=70
     //% blockId=joystick_keyState block="button|%button|is pressed"
-    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
-    export function pressed(button: GamerBitPin): boolean { 
+    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
+    export function pressed(button: Z_Pin): boolean { 
         if (!PIN_INIT) { 
             PinInit();
         }
@@ -72,9 +77,9 @@ namespace joystick {
     //% weight=60
     //% blockGap=50
     //% blockId=joystick_onEvent block="on button|%button|is %event"
-    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
-    //% event.fieldEditor="gridpicker" event.fieldOptions.columns=3
-    export function onEvent(button: GamerBitPin, event: GamerBitEvent, handler: Action) {
+    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
+    //% event.fieldEditor="gridpicker" event.fieldOptions.columns=1
+    export function onEvent(button: Z_Pin, event: GamerBitEvent, handler: Action) {
         init();
         if (!PIN_INIT) { 
             PinInit();
@@ -88,7 +93,7 @@ namespace joystick {
      */
     //% weight=50
     //% blockId=joystick_vibratorMotor block="Vibrator motor switch|%index|"
-    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
+    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=1
     export function vibratorMotor(index: Vibrator): void {
         vibratorMotorSpeed(<number>index);
         return;
@@ -110,12 +115,46 @@ namespace joystick {
         return;
     }
 
+
+    export enum XY_event{ 
+        //% block="static"
+        st = 513,
+        //% block="run"
+        aa = 1023
+    }
+
+    export enum read { 
+        //%x
+        value_x = pins.analogReadPin(AnalogPin.P1),
+        //%y
+        value_y = pins.analogReadPin(AnalogPin.P2)
+    }
+
+    /**
+     * X and Y joystick range -10~10
+     */
+    //% weight=60
+    //% blockGap=50
+    //% blockId=joystick_handle block="joystick on|%button|is %event,%value"
+    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
+    //% event.fieldEditor="gridpicker" event.fieldOptions.columns=1
+    export function handle(button: XY_Pin, event: XY_event, value: read,handler: Action) {
+        init();
+        if (!PIN_INIT) { 
+            PinInit();
+        }
+        control.onEvent(<number>button, <number>event, handler); // register handler
+    }
+    
+    
+
+    
     /**
      * LED indicator light switch.
      */
     //% weight=20
     //% blockId=joystick_led block="LED|%index|"
-    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
+    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=1
     export function led(index: Led): void {
         if (!PIN_INIT) { 
             PinInit();

@@ -10,7 +10,8 @@
     "files": [
         "README.md",
         "main.ts",
-        "joystick.cpp"
+        "joystick.cpp",
+        "_locales/zh/joystick-strings.json"
     ],
     "testFiles": [
         "test.ts"
