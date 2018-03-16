@@ -166,17 +166,17 @@ namespace joystick {
     export function detect(read1: read, compare1: compare, value1: number): boolean { 
         if (compare1 == '>') { 
             if (read1 > value1) { 
-                return true;
+                return false;
             }
         }
         if (compare1 == '=') { 
             if (read1 == value1) { 
-                return true;
+                return false;
             }
         }
         if (compare1 == '<') { 
             if (read1 < value1) { 
-                return true;
+                return false;
             }
         }
         return false;
