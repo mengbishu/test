@@ -130,21 +130,6 @@ namespace joystick {
         value_y = pins.analogReadPin(AnalogPin.P2)
     }
 
-    /**
-     * X and Y joystick range -10~10
-     */
-    //% weight=120
-    //% blockGap=50
-    //% blockId=joystick_handle block="joystick on|%button|is %event|%value"
-    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
-    //% event.fieldEditor="gridpicker" event.fieldOptions.columns=1
-    export function handle(button: XY_Pin, event: XY_event, value: read,handler: Action) {
-        init();
-        if (!PIN_INIT) { 
-            PinInit();
-        }
-        control.onEvent(<number>button, <number>event, handler); // register handler
-    }
     
     export enum compare{
        //% block='>'
