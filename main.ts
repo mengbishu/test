@@ -124,16 +124,16 @@ namespace joystick {
     }
 
     export enum read { 
-        //%x
+        //% block = 'x'
         value_x = pins.analogReadPin(AnalogPin.P1),
-        //%y
+        //% block = 'y'
         value_y = pins.analogReadPin(AnalogPin.P2)
     }
 
     /**
      * X and Y joystick range -10~10
      */
-    //% weight=60
+    //% weight=120
     //% blockGap=50
     //% blockId=joystick_handle block="joystick on|%button|is %event|%value"
     //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
@@ -146,8 +146,42 @@ namespace joystick {
         control.onEvent(<number>button, <number>event, handler); // register handler
     }
     
+    export enum compare{
+        //% block = '>'
+        a = '>',
+        //% block = '='
+        b = '=',
+        //% block = '<'
+        c = '<'
+    }
     
 
+    /**
+     * Detect the analog value of the rocker.
+     */
+    //% weight=60
+    //% blockGap=50
+    //%  blockId=detect_XY block="%read|%compare|%value"
+    //% value.min=-10 value.max=10
+    export function detect(read: read, compare: compare, value: number): boolean { 
+        if (compare == '>') { 
+            if (read > value) { 
+                return true;
+            }
+        }
+        if (compare == '=') { 
+            if (read == value) { 
+                return true;
+            }
+        }
+        if (compare == '<') { 
+            if (read < value) { 
+                return true;
+            }
+        }
+        return false;
+    }
+    
     
     /**
      * LED indicator light switch.
