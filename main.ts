@@ -37,23 +37,6 @@ namespace joystick {
     }
 
 
-    export enum read { 
-        //% block='x'
-        value_x = 1,
-        //% block='y'
-        value_y = 2
-    }
-
-    
-    export enum compare{
-       //% block='>'
-        a = '>',
-        //% block='='
-        b = '=',
-        //% block='<'
-        c = '<'
-    }
-
     //% shim=joystick::init
     function init(): void { 
         return;
@@ -129,34 +112,7 @@ namespace joystick {
     }
 
 
-    
 
-    /**
-     * Detect the analog value of the rocker.
-     */
-    //% weight=60
-    //% blockGap=40
-    //% blockId=detect block="joystick|%read_|%compare_|%value_"
-    //% value.min=-10 value.max=10
-    export function detect(read_: read, compare_: compare, value_: number): boolean { 
-        if (compare_ == '>') { 
-            if (read_ > value_) { 
-                return true;
-            }
-        }
-        if (compare_ == '=') { 
-            if (read_ == value_) { 
-                return true;
-            }
-        }
-        if (compare_ == '<') { 
-            if (read_ < value_) { 
-                return true;
-            }
-        }
-        return false;
-    }
-    
     
     /**
      * LED indicator light switch.
