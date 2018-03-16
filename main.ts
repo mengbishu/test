@@ -1,12 +1,10 @@
-/**
- * User Buttons for DFRobot gamer:bit Players.
- */
 //%
 enum Z_Pin {
     //% block="Z button"
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
 }
 
+//%
 enum XY_Pin { 
     P1 = <number>DAL.MICROBIT_ID_IO_P1,
     P2 = <number>DAL.MICROBIT_ID_IO_P2
@@ -39,6 +37,29 @@ namespace joystick {
         Up = DAL.MICROBIT_BUTTON_EVT_UP,
         //% block="click"
         Click = DAL.MICROBIT_BUTTON_EVT_CLICK,
+    }
+
+    export enum XY_event{ 
+        //% block="static"
+        st = 513,
+        //% block="run"
+        aa = 1023
+    }
+
+    export enum read { 
+        //% block='x'
+        value_x = pins.analogReadPin(AnalogPin.P1),
+        //% block='y'
+        value_y = pins.analogReadPin(AnalogPin.P2)
+    }
+    
+    export enum compare{
+       //% block='>'
+        a = '>',
+        //% block='='
+        b = '=',
+        //% block='<'
+        c = '<'
     }
 
     //% shim=joystick::init
@@ -115,58 +136,6 @@ namespace joystick {
         return;
     }
 
-
-    export enum XY_event{ 
-        //% block="static"
-        st = 513,
-        //% block="run"
-        aa = 1023
-    }
-
-    export enum read { 
-        //% block='x'
-        value_x = pins.analogReadPin(AnalogPin.P1),
-        //% block='y'
-        value_y = pins.analogReadPin(AnalogPin.P2)
-    }
-
-    
-    export enum compare{
-       //% block='>'
-        a = '>',
-        //% block='='
-        b = '=',
-        //% block='<'
-        c = '<'
-    }
-    
-
-    /**
-     * Detect the analog value of the rocker.
-     */
-    //% weight=60
-    //% blockGap=40
-    //% blockId=detect block="joystick|%read_|%compare_|%value_"
-    //% value.min=-10 value.max=10
-    export function detect(read_: read, compare_: compare, value_: number): boolean { 
-        if (compare_ == '>') { 
-            if (read_ > value_) { 
-                return true;
-            }
-        }
-        if (compare_ == '=') { 
-            if (read_ == value_) { 
-                return true;
-            }
-        }
-        if (compare_ == '<') { 
-            if (read_ < value_) { 
-                return true;
-            }
-        }
-        return false;
-    }
-    
     
     /**
      * LED indicator light switch.
