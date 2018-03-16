@@ -171,10 +171,9 @@ namespace joystick {
         }
 
         let value = (pins.analogReadPin(<number>Pin) - 500) / 50;
-        led(1);
 
         if (value !=0) { 
-            control.onEvent(<number>Pin,<number>Pin, handler);
+            control.onEvent(<number>Pin,<number>value, handler);
         }
 
     }
