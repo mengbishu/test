@@ -158,7 +158,25 @@ namespace joystick {
         return false;
     }
     
+    /**
+     * Detect the analog value of the rocker.
+     */
+    //% weight=60
+    //% blockGap=40
+    //% blockId=action block="joystick on|%Pin|is shake"
+    export function shake(Pin: XY_Pin, handler: Action) { 
+        init();
+        if (!PIN_INIT) { 
+            PinInit();
+        }
 
+        let value = (pins.analogReadPin(<number>Pin) - 500) / 50;
+
+        if (value !=0) { 
+            control.onEvent(<number>Pin,<number>value, handler);
+        }
+
+    }
 
     
 
