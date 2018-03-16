@@ -2,57 +2,26 @@
  * User Buttons for DFRobot gamer:bit Players.
  */
 //%
-enum GamerBitPin {
-    //% block="X button"
-    P1 = <number>DAL.MICROBIT_ID_IO_P1,
-    //% block="Y button"
-    P2 = <number>DAL.MICROBIT_ID_IO_P2,
-    //% block="D-PAD up"
+enum Z_Pin {
+    //% block="Z button"
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
-    //% block="D-PAD down"
-    P13 = <number>DAL.MICROBIT_ID_IO_P13,
-    //% block="D-PAD left"
-    P14 = <number>DAL.MICROBIT_ID_IO_P14,
-    //% block="D-PAD right"
-    P15 = <number>DAL.MICROBIT_ID_IO_P15,
 }
 
-/**
- * Trigger Events Proposed by DFRobot gamer:bit Players.
- */
-//%
-enum GamerBitEvent {
-    //% block="pressed"
-    Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
-    //% block="released"
-    Up = DAL.MICROBIT_BUTTON_EVT_UP,
-    //% block="click"
-    Click = DAL.MICROBIT_BUTTON_EVT_CLICK,
+enum XY_Pin { 
+    P1 = <number>DAL.MICROBIT_ID_IO_P1,
+    P2 = <number>DAL.MICROBIT_ID_IO_P2
 }
 
-/**
- * Functions for DFRobot gamer:bit Players.
- */
-//% weight=10 color=#DF6721 icon="\uf11b" block="gamePad"
-namespace gamePad {
+//% weight=10 color=#DF6721 icon="\uf11b" block="joystick"
+namespace joystick { 
+
     let PIN_INIT = 0;
-    
+
     export enum Vibrator { 
         //% blockId="V0" block="stop"
         V0 = 0,
         //% blockId="V1" block="Vibration"
         V1 = 255,     
-    }
-
-    export enum Intensity { 
-        //% blockId="I0" block="stop"
-        I0 = 0,
-        //% blockId="I1" block="weak"
-        I1 = 100,
-        //% blockId="I2" block="medium"
-        I2 = 180,
-        //% blockId="I3" block="strong"
-        I3 = 225
     }
 
     export enum Led {
@@ -61,33 +30,37 @@ namespace gamePad {
         //% blockId="ON" block="on"
         ON = 1
     }
-
+    
+    //%
+    export enum GamerBitEvent {
+        //% block="pressed"
+        Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
+        //% block="released"
+        Up = DAL.MICROBIT_BUTTON_EVT_UP,
+        //% block="click"
+        Click = DAL.MICROBIT_BUTTON_EVT_CLICK,
+    }
 
     //% shim=joystick::init
-    function init(): void {
+    function init(): void { 
         return;
     }
 
-    function PinInit(): void {
+    export function PinInit(): void { 
         pins.setPull(DigitalPin.P1, PinPullMode.PullNone);
         pins.setPull(DigitalPin.P2, PinPullMode.PullNone);
         pins.setPull(DigitalPin.P8, PinPullMode.PullNone);
-        pins.setPull(DigitalPin.P13, PinPullMode.PullNone);
-        pins.setPull(DigitalPin.P14, PinPullMode.PullNone);
-        pins.setPull(DigitalPin.P15, PinPullMode.PullNone);
-        pins.setPull(DigitalPin.P0, PinPullMode.PullUp);
-        pins.setPull(DigitalPin.P16, PinPullMode.PullUp);
+        pins.setPull(DigitalPin.P5, PinPullMode.PullNone);
+        pins.setPull(DigitalPin.P11, PinPullMode.PullNone);
+        pins.setPull(DigitalPin.P16,  PinPullMode.PullUp);
         PIN_INIT = 1;
         return;
     }
 
-    /**
-     * To scan a button whether be triggered : return '1' if pressed; return'0' if not.
-     */
     //% weight=70
-    //% blockId=gamePad_keyState block="button|%button|is pressed"
-    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
-    export function keyState(button: GamerBitPin): boolean {
+    //% blockId=joystick_keyState block="button|%button|is pressed"
+    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
+    export function pressed(button: Z_Pin): boolean { 
         if (!PIN_INIT) { 
             PinInit();
         }
@@ -103,10 +76,10 @@ namespace gamePad {
      */
     //% weight=60
     //% blockGap=50
-    //% blockId=gamePad_onEvent block="on button|%button|is %event"
-    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
-    //% event.fieldEditor="gridpicker" event.fieldOptions.columns=3
-    export function onEvent(button: GamerBitPin, event: GamerBitEvent, handler: Action) {
+    //% blockId=joystick_onEvent block="on button|%button|is %event"
+    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
+    //% event.fieldEditor="gridpicker" event.fieldOptions.columns=1
+    export function onEvent(button: Z_Pin, event: GamerBitEvent, handler: Action) {
         init();
         if (!PIN_INIT) { 
             PinInit();
@@ -114,12 +87,13 @@ namespace gamePad {
         control.onEvent(<number>button, <number>event, handler); // register handler
     }
 
+
     /**
      * Vibrating motor switch.
      */
     //% weight=50
-    //% blockId=gamePad_vibratorMotor block="Vibrator motor switch|%index|"
-    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
+    //% blockId=joystick_vibratorMotor block="Vibrator motor switch|%index|"
+    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=1
     export function vibratorMotor(index: Vibrator): void {
         vibratorMotorSpeed(<number>index);
         return;
@@ -130,7 +104,7 @@ namespace gamePad {
      */
     //% weight=30
     //% blockGap=50
-    //% blockId=gamePad_vibratorMotorSpeed block="Vibrator motor intensity|%degree"
+    //% blockId=joystick_vibratorMotorSpeed block="Vibrator motor intensity|%degree"
     //% degree.min=0 degree.max=255
     export function vibratorMotorSpeed(degree: number): void {
         if (!PIN_INIT) { 
@@ -141,12 +115,65 @@ namespace gamePad {
         return;
     }
 
+
+    export enum XY_event{ 
+        //% block="static"
+        st = 513,
+        //% block="run"
+        aa = 1023
+    }
+
+    export enum read { 
+        //% block='x'
+        value_x = pins.analogReadPin(AnalogPin.P1),
+        //% block='y'
+        value_y = pins.analogReadPin(AnalogPin.P2)
+    }
+
+    
+    export enum compare{
+       //% block='>'
+        a = '>',
+        //% block='='
+        b = '=',
+        //% block='<'
+        c = '<'
+    }
+    
+
+    /**
+     * Detect the analog value of the rocker.
+     */
+    //% weight=60
+    //% blockGap=40
+    //% blockId=detect block="joystick|%read_|%compare_|%value_"
+    //% value.min=-10 value.max=10
+    export function detect(read_: read, compare_: compare, value_: number): boolean { 
+        if (compare_ == '>') { 
+            if (read_ > value_) { 
+                return true;
+            }
+        }
+        if (compare_ == '=') { 
+            if (read_ == value_) { 
+                return true;
+            }
+        }
+        if (compare_ == '<') { 
+            if (read_ < value_) { 
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
     /**
      * LED indicator light switch.
      */
     //% weight=20
-    //% blockId=gamePad_led block="LED|%index|"
-    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
+    //% blockId=joystick_led block="LED|%index|"
+    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=1
     export function led(index: Led): void {
         if (!PIN_INIT) { 
             PinInit();
