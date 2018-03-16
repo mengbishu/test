@@ -158,16 +158,7 @@ namespace joystick {
         return false;
     }
     
-    /**
-     * Detect the analog value of the rocker.
-     */
-    //% weight=60
-    //% blockGap=40
-    //% blockId=action block="joystick on|%Pin|is shake"
-    export function shake(Pin: XY_Pin) { 
-        
 
-    }
 
     
 
