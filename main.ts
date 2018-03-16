@@ -135,7 +135,7 @@ namespace joystick {
      */
     //% weight=60
     //% blockGap=50
-    //% blockId=joystick_handle block="joystick on|%button|is %event,%value"
+    //% blockId=joystick_handle block="joystick on|%button|is %event|%value"
     //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
     //% event.fieldEditor="gridpicker" event.fieldOptions.columns=1
     export function handle(button: XY_Pin, event: XY_event, value: read,handler: Action) {
