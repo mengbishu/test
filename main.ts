@@ -147,7 +147,7 @@ namespace joystick {
     }
     
     export enum compare{
-        //% block = '>'
+       
         a = '>',
         //% block = '='
         b = '=',
