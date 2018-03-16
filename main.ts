@@ -1,13 +1,10 @@
+/**
+ * User Buttons for DFRobot gamer:bit Players.
+ */
 //%
 enum Z_Pin {
     //% block="Z button"
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
-}
-
-//%
-enum XY_Pin { 
-    P1 = <number>DAL.MICROBIT_ID_IO_P1,
-    P2 = <number>DAL.MICROBIT_ID_IO_P2
 }
 
 //% weight=10 color=#DF6721 icon="\uf11b" block="joystick"
@@ -29,6 +26,33 @@ namespace joystick {
         ON = 1
     }
     
+    //%
+    export enum GamerBitEvent {
+        //% block="pressed"
+        Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
+        //% block="released"
+        Up = DAL.MICROBIT_BUTTON_EVT_UP,
+        //% block="click"
+        Click = DAL.MICROBIT_BUTTON_EVT_CLICK,
+    }
+
+
+    export enum read { 
+        //% block='x'
+        value_x = 1,
+        //% block='y'
+        value_y = 2
+    }
+
+    
+    export enum compare{
+       //% block='>'
+        a = '>',
+        //% block='='
+        b = '=',
+        //% block='<'
+        c = '<'
+    }
 
     //% shim=joystick::init
     function init(): void { 
@@ -58,5 +82,92 @@ namespace joystick {
             num = true;
         }
         return num;
+    }
+
+    /**
+     * Registers code to run when a DFRobot gamer:bit event is detected.
+     */
+    //% weight=60
+    //% blockGap=50
+    //% blockId=joystick_onEvent block="on button|%button|is %event"
+    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
+    //% event.fieldEditor="gridpicker" event.fieldOptions.columns=1
+    export function onEvent(button: Z_Pin, event: GamerBitEvent, handler: Action) {
+        init();
+        if (!PIN_INIT) { 
+            PinInit();
+        }
+        control.onEvent(<number>button, <number>event, handler); // register handler
+    }
+
+
+    /**
+     * Vibrating motor switch.
+     */
+    //% weight=50
+    //% blockId=joystick_vibratorMotor block="Vibrator motor switch|%index|"
+    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=1
+    export function vibratorMotor(index: Vibrator): void {
+        vibratorMotorSpeed(<number>index);
+        return;
+    }
+
+    /**
+     * Vibration motor speed setting, adjustable range 0~255.
+     */
+    //% weight=30
+    //% blockGap=50
+    //% blockId=joystick_vibratorMotorSpeed block="Vibrator motor intensity|%degree"
+    //% degree.min=0 degree.max=255
+    export function vibratorMotorSpeed(degree: number): void {
+        if (!PIN_INIT) { 
+            PinInit();
+        }
+        let num = degree * 4;
+        pins.analogWritePin(AnalogPin.P12, <number>num);
+        return;
+    }
+
+
+    
+
+    /**
+     * Detect the analog value of the rocker.
+     */
+    //% weight=60
+    //% blockGap=40
+    //% blockId=detect block="joystick|%read_|%compare_|%value_"
+    //% value.min=-10 value.max=10
+    export function detect(read_: read, compare_: compare, value_: number): boolean { 
+        if (compare_ == '>') { 
+            if (read_ > value_) { 
+                return true;
+            }
+        }
+        if (compare_ == '=') { 
+            if (read_ == value_) { 
+                return true;
+            }
+        }
+        if (compare_ == '<') { 
+            if (read_ < value_) { 
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
+    /**
+     * LED indicator light switch.
+     */
+    //% weight=20
+    //% blockId=joystick_led block="LED|%index|"
+    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=1
+    export function led(index: Led): void {
+        if (!PIN_INIT) { 
+            PinInit();
+        }
+        pins.digitalWritePin(DigitalPin.P16, <number>index);
     }
 }
