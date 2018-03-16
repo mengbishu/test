@@ -160,8 +160,8 @@ namespace joystick {
      * Detect the analog value of the rocker.
      */
     //% weight=60
-    //% blockGap=50
-    //% blockId=detect_XY block="joystick|b %read|a %compare| %value"
+    //% blockGap=40
+    //% blockId=detect block="joystick|b %read|a %compare|k %value"
     //% value.min=-10 value.max=10
     export function detect(read: read, compare: compare, value: number): boolean { 
         if (compare == '>') { 
