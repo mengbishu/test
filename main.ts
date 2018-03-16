@@ -124,9 +124,9 @@ namespace joystick {
     }
 
     export enum read { 
-        //% block = 'x'
+        //% block='x'
         value_x = pins.analogReadPin(AnalogPin.P1),
-        //% block = 'y'
+        //% block='y'
         value_y = pins.analogReadPin(AnalogPin.P2)
     }
 
@@ -147,11 +147,11 @@ namespace joystick {
     }
     
     export enum compare{
-       
+       //% block='>'
         a = '>',
-        //% block = '='
+        //% block='='
         b = '=',
-        //% block = '<'
+        //% block='<'
         c = '<'
     }
     
