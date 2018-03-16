@@ -29,38 +29,6 @@ namespace joystick {
         ON = 1
     }
     
-    //%
-    export enum GamerBitEvent {
-        //% block="pressed"
-        Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
-        //% block="released"
-        Up = DAL.MICROBIT_BUTTON_EVT_UP,
-        //% block="click"
-        Click = DAL.MICROBIT_BUTTON_EVT_CLICK,
-    }
-
-    export enum XY_event{ 
-        //% block="static"
-        st = 513,
-        //% block="run"
-        aa = 1023
-    }
-
-    export enum read { 
-        //% block='x'
-        value_x = pins.analogReadPin(AnalogPin.P1),
-        //% block='y'
-        value_y = pins.analogReadPin(AnalogPin.P2)
-    }
-    
-    export enum compare{
-       //% block='>'
-        a = '>',
-        //% block='='
-        b = '=',
-        //% block='<'
-        c = '<'
-    }
 
     //% shim=joystick::init
     function init(): void { 
