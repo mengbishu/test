@@ -63,7 +63,7 @@ namespace gamePad {
     }
 
 
-    //% shim=gamerpad::init
+    //% shim=joystick::init
     function init(): void {
         return;
     }
