@@ -163,19 +163,19 @@ namespace joystick {
     //% blockGap=50
     //%  blockId=detect_XY block="%read|%compare|%value"
     //% value.min=-10 value.max=10
-    export function detect(read: read, compare: compare, value: number): boolean { 
-        if (compare == '>') { 
-            if (read > value) { 
+    export function detect(read1: read, compare1: compare, value1: number): boolean { 
+        if (compare1 == '>') { 
+            if (read1 > value1) { 
                 return true;
             }
         }
-        if (compare == '=') { 
-            if (read == value) { 
+        if (compare1 == '=') { 
+            if (read1 == value1) { 
                 return true;
             }
         }
-        if (compare == '<') { 
-            if (read < value) { 
+        if (compare1 == '<') { 
+            if (read1 < value1) { 
                 return true;
             }
         }
