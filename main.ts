@@ -101,7 +101,8 @@ namespace joystick {
         if (!PIN_INIT) { 
             PinInit();
         }
-        control.onEvent(<number>button, <number>event, handler); // register handler
+//        control.onEvent(<number>button, <number>event, handler); // register handler
+        control.onEvent(<number>DAL.MICROBIT_ID_IO_P15, <number>DAL.MICROBIT_BUTTON_EVT_UP, handler)
     }
 
 
@@ -179,6 +180,30 @@ namespace joystick {
     export function Shake(pin: number, num: number, a: Action): void { 
         return;
     }
+
+    /**
+     * Detect the analog value of the rocker.
+     */
+    //% weight=60
+    //% blockGap=40
+    //% blockId=action block="joystick  %pin shake, value %value"
+    export function wasShake(pin: XY_Pin, num: number, a: Action): void { 
+        init();
+        if (!PIN_INIT) { 
+            PinInit();
+        }
+        while (true) {
+            if (pin == <number>DAL.MICROBIT_ID_IO_P1) {
+                num = (pins.analogReadPin(AnalogPin.P1) - 500) / 50;
+            }
+            else if (pin == <number>DAL.MICROBIT_ID_IO_P2) { 
+                num = (pins.analogReadPin(AnalogPin.P2) - 500) / 50;
+            }
+            
+            control.onEvent(<number>DAL.MICROBIT_ID_IO_P15, <number>DAL.MICROBIT_BUTTON_EVT_UP, a); // register handler
+        }    
+    } 
+    
 
     
 
