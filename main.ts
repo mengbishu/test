@@ -170,13 +170,13 @@ namespace joystick {
     //% weight=60
     //% blockGap=40
     //% blockId=action block="joystick on| %pin|is shake, value %value"
-    export function isShake(pin: XY_Pin, value: number, a: Action): void { 
-        Shake(pin,value,a);
+    export function isShake(pin: XY_Pin, num: number, a: Action): void { 
+        Shake(pin,num,a);
         return;
     }
 
     //% shim=joystick::Shake
-    export function Shake(pin: number, value: number, a: Action): void { 
+    export function Shake(pin: number, num: number, a: Action): void { 
         return;
     }
 
