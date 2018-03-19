@@ -176,7 +176,7 @@ namespace joystick {
     }
 
     //% shim=joystick::Shake
-    export function Shake(pin: number, value: number, handler: Action): void { 
+    export function Shake(pin: number, value: number, a: Action): void { 
         return;
     }
 
