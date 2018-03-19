@@ -29,9 +29,9 @@ namespace joystick {
         if (a != 0) { 
             incr(a);
 //            while (true) {
-                value = pins.analogReadPin(pin);
+//                value = pins.analogReadPin(pin);
                 runAction0((Action)a);
-//                fiber_sleep(50);
+                fiber_sleep(50);
 //            }
         }
     }
