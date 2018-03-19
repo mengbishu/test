@@ -23,10 +23,10 @@ namespace joystick {
         initialized = true;
     }
 
-    void forever_stubs(void *a,int pin,int num) {
+    void forever_stubs(void *a) {
         while (true) {
-            int value;
-            value = pins.analogReadPin(pin);
+//            int value;
+//            value = pins.analogReadPin(pin);
             runAction0((Action)a);
             fiber_sleep(50);
         }
@@ -36,7 +36,7 @@ namespace joystick {
 
         if (a != 0) { 
             incr(a);
-            create_fibers(forever_stub, (void*)a,pin,num);
+            create_fibers(forever_stub, (void*)a);
         }
     }
 }
