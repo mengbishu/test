@@ -1,5 +1,4 @@
 #include "pxt.h"
-#include "pins.h"
 
 using namespace pxt;
 //% weight=10 color=#DF6721 icon="\uf11b" block="joystick"
