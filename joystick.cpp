@@ -36,7 +36,7 @@ namespace joystick {
 
         if (a != 0) { 
             incr(a);
-            create_fibers(forever_stub, (void*)a);
+            create_fiber(forever_stubs, (void*)a);
         }
     }
 }
