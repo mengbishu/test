@@ -30,7 +30,10 @@ namespace joystick {
             fiber_sleep(50);
         }
     }
-
+    //% weight=60
+    //% blockGap=40
+    //% blockId=action block="joystick on| %pin|is shake, value %value"
+    //% shim=joystick::isShake
     void isShake(int pin,int num,Action a) {
 
         if (a != 0) { 

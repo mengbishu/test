@@ -165,10 +165,7 @@ namespace joystick {
     /**
      * Detect the analog value of the rocker.
      */
-    //% weight=60
-    //% blockGap=40
-    //% blockId=action block="joystick on| %pin|is shake, value %value"
-    //% shim=joystick::isShake
+
     declare function isShake(pin: XY_Pin, value: number, handler: Action): void;
 
     
