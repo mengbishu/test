@@ -170,7 +170,6 @@ namespace joystick {
     //% blockId=action block="joystick on| %pin|is shake, value %value"
     //% shim=joystick::isShake
     export function isShake(pin: XY_Pin, value: number, handler: Action): void { 
-        handler
         return;
     }
 

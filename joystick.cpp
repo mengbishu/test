@@ -31,10 +31,9 @@ namespace joystick {
     }
 
     void isShake(int pin,int num,Action a) {
-
         if (a != 0) { 
             incr(a);
-            create_fiber(forever_stub, (void*)a,pin,num);
+//            create_fiber(forever_stub, (void*)a,pin,num);
         }
     }
 }
