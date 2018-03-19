@@ -168,7 +168,7 @@ namespace joystick {
     //% weight=60
     //% blockGap=40
     //% blockId=action block="joystick on| %pin|is shake, value %value"
-    //% shim=joystick::isShake
+    //% deprecated=true shim=joystick::isShake
     export declare function isShake(pin: XY_Pin, value: number, handler: Action): void;
 
     
