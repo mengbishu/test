@@ -32,7 +32,7 @@ namespace joystick {
     }
     //% weight=60
     //% blockGap=40
-    //% blockId=action block="joystick on| %pin|is shake, value %value"
+    //% blockId=isShake block="joystick on| %pin|is shake, value %num"
     void isShake(int pin,int num,Action a) {
         if (a != 0) { 
             incr(a);
