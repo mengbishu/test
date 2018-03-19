@@ -31,7 +31,7 @@ namespace joystick {
 //            while (true) {
                 value = pins.analogReadPin(pin);
                 runAction0((Action)a);
-                fiber_sleep(50);
+//                fiber_sleep(50);
 //            }
         }
     }
