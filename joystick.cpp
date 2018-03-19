@@ -29,7 +29,7 @@ namespace joystick {
         if (a != 0) { 
             incr(a);
             while (true) {
-                num = pins.analogReadPin(pin);
+//                num = pins.analogReadPin(pin);
                 runAction0((Action)a);
                 fiber_sleep(50);
             }
