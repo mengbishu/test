@@ -24,7 +24,7 @@ namespace joystick {
     }
 
     //%
-    void forever_stubs(void *a,int pin,int value) {
+    void forever_stubs(void *a) {
         while (true) {
 //            int value;
 //            value = pins.analogReadPin(pin);
@@ -37,7 +37,7 @@ namespace joystick {
     void Shake(int pin,int value,Action a) {
         if (a != 0) { 
             incr(a);
-            create_fiber(forever_stubs, (void*)a,pin,value);
+            create_fiber(forever_stubs, (void*)a);
         }
     }
 }
