@@ -1,7 +1,6 @@
 #include "pxt.h"
 
 using namespace pxt;
-//% weight=100 color=#DF6721 icon="\uf11b" block="joysticks"
 namespace joystick {
     bool initialized = false;
 
@@ -25,28 +24,18 @@ namespace joystick {
 
     void forever_stub(void *a,int pin,int num) {
         while (true) {
-            num = pins.analogReadPin(pin);
+            int value;
+            value = pins.analogReadPin(pin);
             runAction0((Action)a);
             fiber_sleep(50);
         }
     }
-    //% weight=60
-    //% blockGap=40
-    //% blockId=isShake block="joystick on| %pin|is shake, value %num"
+
     void isShake(int pin,int num,Action a) {
+
         if (a != 0) { 
             incr(a);
             create_fiber(forever_stub, (void*)a,pin,num);
         }
-    }
-    /**
-     * Pause for the specified time in milliseconds
-     * @param ms how long to pause for, eg: 100, 200, 500, 1000, 2000
-     */
-    //% help=basic/pause weight=54
-    //% async block="pause (ms) %pause"
-    //% blockId=device_pause icon="\uf110"
-    void pause(int ms) {
-      fiber_sleep(ms);
     }
 }
