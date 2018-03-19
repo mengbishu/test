@@ -21,4 +21,20 @@ namespace joystick {
 
         initialized = true;
     }
+
+    void forever_stub(void *a,int pin,int num) {
+        while (true) {
+            num = pins.analogReadPin(pin);
+            runAction0((Action)a);
+            fiber_sleep(50);
+        }
+    }
+
+    void isShake(int pin,int num,Action a) {
+
+        if (a != 0) { 
+            incr(a);
+            create_fiber(forever_stub, (void*)a,pin,num);
+        }
+    }
 }

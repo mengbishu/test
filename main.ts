@@ -158,30 +158,22 @@ namespace joystick {
         return false;
     }
     
+    export class Data {
+        public receivedNumber: number;
+    }
+
     /**
      * Detect the analog value of the rocker.
      */
     //% weight=60
     //% blockGap=40
-    //% blockId=action block="joystick on|%Pin|is shake"
-    export function shake(Pin: XY_Pin, handler: Action) { 
-        init();
-        if (!PIN_INIT) { 
-            PinInit();
-        }
-
-        let value = (pins.analogReadPin(<number>Pin) - 500) / 50;
-
-        if (value !=0) { 
-            control.onEvent(<number>Pin,<number>value, handler);
-        }
-
+    //% blockId=action block="joystick is shake"
+    //% shim=joystick::isShake
+    export function isShake(pin: XY_Pin, value:number, handler: Action): void { 
+        return;
     }
 
     
-
-
-
 
     /**
      * LED indicator light switch.
