@@ -29,11 +29,13 @@ namespace joystick {
             fiber_sleep(50);
         }
     }
-
+    //% weight=60
+    //% blockGap=40
+    //% blockId=action block="joystick on| %pin|is shake, value %value"
     void isShake(int pin,int num,Action a) {
         if (a != 0) { 
             incr(a);
-//            create_fiber(forever_stub, (void*)a,pin,num);
+            create_fiber(forever_stub, (void*)a,pin,num);
         }
     }
 }
