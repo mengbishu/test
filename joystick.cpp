@@ -32,6 +32,7 @@ namespace joystick {
         }
     }
 
+    //%
     void Shake(Action a) {
         if (a != 0) { 
             incr(a);
