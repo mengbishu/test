@@ -32,7 +32,7 @@ namespace joystick {
         }
     }
 
-    void Shake(int pin,int value,Action a) {
+    void Shake(Action a) {
         if (a != 0) { 
             incr(a);
             create_fiber(forever_stubs, (void*)a);
