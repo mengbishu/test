@@ -102,7 +102,7 @@ namespace joystick {
             PinInit();
         }
 //        control.onEvent(<number>button, <number>event, handler); // register handler
-        control.onEvent(<number>DAL.MICROBIT_ID_IO_P15, <number>DAL.MICROBIT_BUTTON_EVT_DOWN, handler)
+        control.onEvent(<number>DAL.MICROBIT_ID_IO_P8, (<number>GamerBitEvent.Click)|(<number>GamerBitEvent.Down)|(<number>GamerBitEvent.Up), handler)
     }
 
 
@@ -199,8 +199,9 @@ namespace joystick {
             else if (pin == <number>DAL.MICROBIT_ID_IO_P2) { 
                 num = (pins.analogReadPin(AnalogPin.P2) - 500) / 50;
             }
-            if (num != 0)
-            control.onEvent(<number>DAL.MICROBIT_ID_IO_P15, <number>DAL.MICROBIT_BUTTON_EVT_UP, a); // register handler
+            if (num != 0) {
+                control.onEvent(<number>DAL.MICROBIT_ID_IO_P15, <number>DAL.MICROBIT_BUTTON_EVT_UP, a); // register handler
+            }    
         }    
     } 
     
