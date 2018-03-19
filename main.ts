@@ -97,10 +97,10 @@ namespace joystick {
     //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
     //% event.fieldEditor="gridpicker" event.fieldOptions.columns=1
     export function onEvent(button: Z_Pin, event: GamerBitEvent, handler: Action) {
-        init();
-        if (!PIN_INIT) { 
-            PinInit();
-        }
+//        init();
+//        if (!PIN_INIT) { 
+//            PinInit();
+//        }
 //        control.onEvent(<number>button, <number>event, handler); // register handler
         control.onEvent(<number>DAL.MICROBIT_ID_IO_P8, <number>DAL.MICROBIT_EVT_ANY, handler)
     }
