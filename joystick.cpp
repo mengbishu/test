@@ -1,7 +1,7 @@
 #include "pxt.h"
 
 using namespace pxt;
-//% weight=10 color=#DF6721 icon="\uf11b" block="joystick"
+//% weight=100 color=#DF6721 icon="\uf11b" block="joysticks"
 namespace joystick {
     bool initialized = false;
 
@@ -38,5 +38,15 @@ namespace joystick {
             incr(a);
             create_fiber(forever_stub, (void*)a,pin,num);
         }
+    }
+    /**
+     * Pause for the specified time in milliseconds
+     * @param ms how long to pause for, eg: 100, 200, 500, 1000, 2000
+     */
+    //% help=basic/pause weight=54
+    //% async block="pause (ms) %pause"
+    //% blockId=device_pause icon="\uf110"
+    void pause(int ms) {
+      fiber_sleep(ms);
     }
 }
