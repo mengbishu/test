@@ -28,11 +28,7 @@ namespace joystick {
     void Shake(int pin,int num,Action a) {
         if (a != 0) { 
             incr(a);
-            while (true) {
-//                num = pins.analogReadPin(pin);
-                runAction0((Action)a);
-                fiber_sleep(50);
-            }
+            runAction0((Action)a);
         }
     }
 }

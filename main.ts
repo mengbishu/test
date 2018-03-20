@@ -93,7 +93,7 @@ namespace joystick {
      */
     //% weight=60
     //% blockGap=50
-    //% blockId=joystick_onEvent16 block="16on button|%button|is %event"
+    //% blockId=joystick_onEvent block="on button|%button|is %event"
     //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
     //% event.fieldEditor="gridpicker" event.fieldOptions.columns=1
     export function onEvent(button: Z_Pin, event: GamerBitEvent, handler: Action) {
@@ -101,25 +101,7 @@ namespace joystick {
         if (!PIN_INIT) { 
             PinInit();
         }
-//        control.onEvent(<number>button, <number>event, handler); // register handler
-        control.onEvent(<number>DAL.MICROBIT_ID_IO_P16, <number>DAL.MICROBIT_PIN_EVT_PULSE_LO, handler)
-    }
-
-    /**
-     * Registers code to run when a DFRobot gamer:bit event is detected.
-     */
-    //% weight=60
-    //% blockGap=50
-    //% blockId=joystick_onEvent block="8on button|%button|is %event"
-    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
-    //% event.fieldEditor="gridpicker" event.fieldOptions.columns=1
-    export function onEvent1(button: Z_Pin, event: GamerBitEvent, handler: Action) {
-        init();
-        if (!PIN_INIT) { 
-            PinInit();
-        }
-//        control.onEvent(<number>button, <number>event, handler); // register handler
-        control.onEvent(<number>DAL.MICROBIT_ID_IO_P8, <number>DAL.MICROBIT_PIN_EVT_PULSE_LO, handler)
+        control.onEvent(<number>button, <number>event, handler); // register handler
     }
 
 
@@ -190,9 +172,14 @@ namespace joystick {
     //% weight=60
     //% blockGap=40
     //% blockId=action block="joystick on| %pin|is shake, value %value"
-    export function isShake(pin: XY_Pin, num: number, a: Action): void { 
-        Shake(pin,num,a);
-        return;
+    export function isShake(pin: read, num: number, a: Action): void { 
+        while (true) {
+            num = pin;
+            if (pin != 0) {
+                Shake(pin, num, a);
+                basic.pause(50);
+            }
+        }
     }
 
     //% shim=joystick::Shake
