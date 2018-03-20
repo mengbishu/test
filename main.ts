@@ -78,12 +78,12 @@ namespace joystick {
 
     //% weight=70
     //% blockId=pressedZ block="joystick Z is pressed"
-    export function pressed(button: Z_Pin): boolean { 
+    export function pressed(): boolean { 
         if (!PIN_INIT) { 
             PinInit();
         }
         let num = false;
-        if (0 == pins.digitalReadPin(<number>button)) {
+        if (0 == pins.digitalReadPin(<number>DAL.MICROBIT_ID_IO_P8)) {
             num = true;
         }
         return num;
@@ -95,12 +95,12 @@ namespace joystick {
     //% weight=60
     //% blockGap=50
     //% blockId=ZState block="joystick Z is %event"
-    export function onEvent(button: Z_Pin, event: joystickEvent, handler: Action) {
+    export function onEvent(event: joystickEvent, handler: Action) {
         init();
         if (!PIN_INIT) { 
             PinInit();
         }
-        control.onEvent(<number>button, <number>event, handler); // register handler
+        control.onEvent(<number>DAL.MICROBIT_ID_IO_P8, <number>event, handler); // register handler
     }
 
     /**
