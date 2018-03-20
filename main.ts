@@ -95,7 +95,7 @@ namespace joystick {
     //% weight=60
     //% blockGap=50
     //% blockId=ZState block="on button Z is %event"
-    export function onEvent(button: Z_Pin, event: GamerBitEvent, handler: Action) {
+    export function onEvent(button: Z_Pin, event: joystickEvent, handler: Action) {
         init();
         if (!PIN_INIT) { 
             PinInit();
