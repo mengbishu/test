@@ -197,15 +197,6 @@ namespace joystick {
         public receivedNumber: number;
     }
 
-    export function onDataReceivedaa(body: () => void): void{
-        return;
-    }
-
-    export function receivedNumber(): number { 
-        return;
-    }
-
-
     //% help=radio/on-data-packet-received
     //% mutate=objectdestructuring
     //% mutateText=Packet
@@ -214,8 +205,8 @@ namespace joystick {
     export function onData(cb: (packet: Packet) => void) {
         Shake(() => {
             const packet = new Packet();
-            packet.receivedNumber = (pins.analogReadPin(AnalogPin.P1) - 512) / 50
-            cb(packet)
+            packet.receivedNumber = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
+            cb(packet);
         });
     }
 }
