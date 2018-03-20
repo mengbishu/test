@@ -20,12 +20,18 @@ namespace joystick {
         initialized = true;
     }
 
+    void forever_stubdf(void *a) {
+      while (true) {
+        runAction0((Action)a);
+        fiber_sleep(20);
+      }
+    }
 
     //%
     void Shake(Action a) {
-        if (a != 0) { 
+        if (a != 0) {
             incr(a);
-            runAction0((Action)a);
+            create_fiber(forever_stubdf, (void*)a);
         }
     }
 }
