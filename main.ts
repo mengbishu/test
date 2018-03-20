@@ -188,7 +188,6 @@ namespace joystick {
      */
     //% weight=20
     //% blockId=joystick_led block="LED|%index|"
-    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=1
     export function led(index: Led): void {
         if (!PIN_INIT) { 
             PinInit();
