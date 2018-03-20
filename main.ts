@@ -3,12 +3,14 @@
  */
 //%
 enum Z_Pin {
-    //% block="Z button"
+    //% blockId="V0" block="Z button"
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
 }
 
 enum XY_Pin { 
+    //% blockId="P1" block="X"
     P1 = <number>DAL.MICROBIT_ID_IO_P1,
+    //% blockId="P2" block="Y"
     P2 = <number>DAL.MICROBIT_ID_IO_P2
 }
 
@@ -32,7 +34,7 @@ namespace joystick {
     }
     
     //%
-    export enum GamerBitEvent {
+    export enum joystickEvent {
         //% block="pressed"
         Down = DAL.MICROBIT_BUTTON_EVT_DOWN,
         //% block="released"
@@ -42,9 +44,9 @@ namespace joystick {
     }
 
     export enum read { 
-        //% block='x'
+        //% block='X'
         value_x = (pins.analogReadPin(AnalogPin.P1)-512)/50,
-        //% block='y'
+        //% block='Y'
         value_y = (pins.analogReadPin(AnalogPin.P2)-512)/50
     }
 
@@ -75,8 +77,7 @@ namespace joystick {
     }
 
     //% weight=70
-    //% blockId=joystick_keyState block="button|%button|is pressed"
-    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
+    //% blockId=pressedZ block="joystick Z is pressed"
     export function pressed(button: Z_Pin): boolean { 
         if (!PIN_INIT) { 
             PinInit();
@@ -93,10 +94,8 @@ namespace joystick {
      */
     //% weight=60
     //% blockGap=50
-    //% blockId=joystick_onEvent block="on button|%button|is %event"
-    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=1
-    //% event.fieldEditor="gridpicker" event.fieldOptions.columns=1
-    export function onEvent(button: Z_Pin, event: GamerBitEvent, handler: Action) {
+    //% blockId=ZState block="joystick Z is %event"
+    export function onEvent(button: Z_Pin, event: joystickEvent, handler: Action) {
         init();
         if (!PIN_INIT) { 
             PinInit();
@@ -104,15 +103,11 @@ namespace joystick {
         control.onEvent(<number>button, <number>event, handler); // register handler
     }
 
-
-
-
     /**
      * Vibrating motor switch.
      */
     //% weight=50
-    //% blockId=joystick_vibratorMotor block="Vibrator motor switch|%index|"
-    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=1
+    //% blockId=vibratorMotor block="Vibrator motor switch|%index|"
     export function vibratorMotor(index: Vibrator): void {
         vibratorMotorSpeed(<number>index);
         return;
@@ -123,7 +118,7 @@ namespace joystick {
      */
     //% weight=30
     //% blockGap=50
-    //% blockId=joystick_vibratorMotorSpeed block="Vibrator motor intensity|%degree"
+    //% blockId=vibratorMotorSpeed block="Vibrator motor intensity|%degree"
     //% degree.min=0 degree.max=255
     export function vibratorMotorSpeed(degree: number): void {
         if (!PIN_INIT) { 
@@ -139,7 +134,7 @@ namespace joystick {
      */
     //% weight=60
     //% blockGap=40
-    //% blockId=detect block="joystick|%read_|%compare_|%value_"
+    //% blockId=compare block="joystick|%read_|%compare_|%value_"
     //% value_.min=-10 value_.max=10
     export function detect(read_: read, compare_: compare, value_: number): boolean { 
         if (compare_ == 1) { 
@@ -160,11 +155,6 @@ namespace joystick {
         return false;
     }
     
-    export class Data {
-        public receivedNumber: number;
-    }
-
-
 
     /**
      * Detect the analog value of the rocker.
@@ -192,33 +182,6 @@ namespace joystick {
     export function Shake(pin: number, num: number, a: Action): void { 
         return;
     }
-
-    /**
-     * Detect the analog value of the rocker.
-     */
-    //% weight=60
-    //% blockGap=40
-    //% blockId=action block="joystick  %pin shake, value %value"
-    export function wasShake(pin: XY_Pin, num: number, a: Action): void { 
-        init();
-        if (!PIN_INIT) { 
-            PinInit();
-        }
-        while (true) {
-            if (pin == <number>DAL.MICROBIT_ID_IO_P1) {
-                num = (pins.analogReadPin(AnalogPin.P1) - 500) / 50;
-            }
-            else if (pin == <number>DAL.MICROBIT_ID_IO_P2) { 
-                num = (pins.analogReadPin(AnalogPin.P2) - 500) / 50;
-            }
-            if (num != 0) {
-                control.onEvent(<number>DAL.MICROBIT_ID_IO_P15, <number>DAL.MICROBIT_BUTTON_EVT_UP, a); // register handler
-            }    
-        }    
-    } 
-    
-
-    
 
     /**
      * LED indicator light switch.
