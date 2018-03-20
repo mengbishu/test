@@ -102,7 +102,7 @@ namespace joystick {
             PinInit();
         }
 //        control.onEvent(<number>button, <number>event, handler); // register handler
-        control.onEvent(<number>DAL.MICROBIT_ID_IO_P8, <number>DAL.MICROBIT_PIN_EVT_FALL, handler)
+        control.onEvent(<number>DAL.MICROBIT_ID_IO_P16, <number>DAL.MICROBIT_PIN_EVT_PULSE_HI, handler)
     }
 
 
