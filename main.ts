@@ -43,9 +43,9 @@ namespace joystick {
 
     export enum read { 
         //% block='x'
-        value_x = (pins.analogReadPin(AnalogPin.P1)-500)/50,
+        value_x = (pins.analogReadPin(AnalogPin.P1)-512)/50,
         //% block='y'
-        value_y = (pins.analogReadPin(AnalogPin.P2)-500)/50
+        value_y = (pins.analogReadPin(AnalogPin.P2)-512)/50
     }
 
     
@@ -103,6 +103,8 @@ namespace joystick {
         }
         control.onEvent(<number>button, <number>event, handler); // register handler
     }
+
+
 
 
     /**
@@ -170,15 +172,51 @@ namespace joystick {
     //% weight=60
     //% blockGap=40
     //% blockId=action block="joystick on| %pin|is shake, value %value"
-    export function isShake(pin: XY_Pin, value: number, a: Action): void { 
-        Shake(pin,value,a);
-        return;
+    export function isShake(pin: XY_Pin, num: number, a: Action): void { 
+        while (true) {
+            if (pin == XY_Pin.P1) {
+                num = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
+            }
+            else if (pin == XY_Pin.P2) { 
+                num = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
+            }
+            serial.writeNumber(num);
+            if (num != 0) {
+                Shake(pin, num, a);
+            }
+            basic.pause(50);
+        }
     }
 
     //% shim=joystick::Shake
-    export function Shake(pin: number, value: number, a: Action): void { 
+    export function Shake(pin: number, num: number, a: Action): void { 
         return;
     }
+
+    /**
+     * Detect the analog value of the rocker.
+     */
+    //% weight=60
+    //% blockGap=40
+    //% blockId=action block="joystick  %pin shake, value %value"
+    export function wasShake(pin: XY_Pin, num: number, a: Action): void { 
+        init();
+        if (!PIN_INIT) { 
+            PinInit();
+        }
+        while (true) {
+            if (pin == <number>DAL.MICROBIT_ID_IO_P1) {
+                num = (pins.analogReadPin(AnalogPin.P1) - 500) / 50;
+            }
+            else if (pin == <number>DAL.MICROBIT_ID_IO_P2) { 
+                num = (pins.analogReadPin(AnalogPin.P2) - 500) / 50;
+            }
+            if (num != 0) {
+                control.onEvent(<number>DAL.MICROBIT_ID_IO_P15, <number>DAL.MICROBIT_BUTTON_EVT_UP, a); // register handler
+            }    
+        }    
+    } 
+    
 
     
 
