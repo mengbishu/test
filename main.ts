@@ -180,7 +180,7 @@ namespace joystick {
             else if (pin == XY_Pin.P2) { 
                 num = (pins.analogReadPin(AnalogPin.P2) - 500) / 50;
             }
-
+            serial.writeNumber(num);
             if (num != 0) {
                 Shake(pin, num, a);
             }
