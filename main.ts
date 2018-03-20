@@ -137,7 +137,7 @@ namespace joystick {
      */
     //% weight=60
     //% blockGap=40
-    //% blockId=compare block="joystick|%read_|%compare_|%value_"
+    //% blockId=compare block="joystick |%read_|%compare_|%value_"
     //% value_.min=-10 value_.max=10
     export function detect(read_: read, compare_: compare, value_: number): boolean { 
         if (compare_ == 1) { 
