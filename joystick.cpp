@@ -34,4 +34,16 @@ namespace joystick {
             create_fiber(forever_stubdf, (void*)a);
         }
     }
+
+    void onDataReceived(Action body) {
+        if (radioEnable() != MICROBIT_OK) return;
+        registerWithDal(MICROBIT_ID_RADIO, MICROBIT_RADIO_EVT_DATAGRAM, body);
+        // make sure the receive buffer has a free spot
+        receiveNumber();
+    }
+
+    int receivedNumber() {
+        if (radioEnable() != MICROBIT_OK) return 0;
+        return value;
+    }
 }
