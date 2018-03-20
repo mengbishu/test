@@ -174,11 +174,12 @@ namespace joystick {
     //% blockId=action block="joystick on| %pin|is shake, value %value"
     export function isShake(pin: read, num: number, a: Action): void { 
         while (true) {
-            led(Led.ON);
             num = pin;
             if (pin != 0) {
+                led(Led.ON);
                 Shake(pin, num, a);
-                basic.pause(50);
+                basic.pause(1000);
+                led(Led.OFF);
             }
         }
     }
