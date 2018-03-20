@@ -11,7 +11,5 @@
 	"joystick.Vibrator.V1|block": "振动",
 	"joystick.Led.OFF|block": "灭",
 	"joystick.Led.ON|block": "亮",
-  "joystick.pressedZ|block":"摇杆 Z 被按下",
-  "joystick.ZState|block":"摇杆 Z |%event|"
-	"joystick.vibratorMotor|block": "振动电机 |%index|"
+  "joystick.pressedZ|block":"摇杆 Z 被按下"
 }
