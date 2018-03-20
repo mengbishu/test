@@ -175,13 +175,15 @@ namespace joystick {
     export function isShake(pin: read, num: number, a: Action): void { 
         while (true) {
             num = pin;
-            led(Led.ON);
+            serial.writeNumber(pin)
             if (pin != 0) {
                 led(Led.OFF);
+                
                 Shake(pin, num, a);
-                basic.pause(1000);
+                
                 led(Led.ON);
             }
+            basic.pause(1000);
         }
     }
 
