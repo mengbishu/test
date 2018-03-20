@@ -11,7 +11,7 @@
         "README.md",
         "main.ts",
         "joystick.cpp",
-        "_locales/zh/joystick-strings.json"
+
     ],
     "testFiles": [
         "test.ts"
