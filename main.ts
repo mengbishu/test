@@ -105,15 +105,15 @@ namespace joystick {
 
     //% weight=60
     //% blockGap=50
-    //% blockId=gamePad_onEvent block="on button|%button|is %event"
+    //% blockId=gamePad_onEvent block="on button|is %event"
     //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
     //% event.fieldEditor="gridpicker" event.fieldOptions.columns=3
-    export function aEvent(button: Z_Pin, event: joystickEvent, handler: Action) {
+    export function aEvent( event: joystickEvent, handler: Action) {
         init();
         if (!PIN_INIT) { 
             PinInit();
         }
-        control.onEvent(<number>button, <number>event, handler); // register handler
+        control.onEvent(<number>DAL.MICROBIT_ID_IO_P8, <number>event, handler); // register handler
     }
 
     /**
