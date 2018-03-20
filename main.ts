@@ -175,11 +175,12 @@ namespace joystick {
     export function isShake(pin: read, num: number, a: Action): void { 
         while (true) {
             num = pin;
+            led(Led.ON);
             if (pin != 0) {
-                led(Led.ON);
+                led(Led.OFF);
                 Shake(pin, num, a);
                 basic.pause(1000);
-                led(Led.OFF);
+                led(Led.ON);
             }
         }
     }
