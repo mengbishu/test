@@ -212,7 +212,7 @@ namespace joystick {
     //% mutateDefaults="receivedNumber;receivedString:name,receivedNumber:value;receivedString"
     //% blockId=radio block="on radio " blockGap=8
     export function onDataPacketReceived(cb: (packet: Packet) => void) {
-        onDataReceivedaa(() => {
+        Shake(() => {
             const packet = new Packet();
             packet.receivedNumber = receivedNumber();
             cb(packet)
