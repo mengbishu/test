@@ -43,9 +43,9 @@ namespace joystick {
 
     export enum read { 
         //% block='x'
-        value_x = (pins.analogReadPin(AnalogPin.P1)-500)/50,
+        value_x = (pins.analogReadPin(AnalogPin.P1)-512)/50,
         //% block='y'
-        value_y = (pins.analogReadPin(AnalogPin.P2)-500)/50
+        value_y = (pins.analogReadPin(AnalogPin.P2)-512)/50
     }
 
     
@@ -175,10 +175,10 @@ namespace joystick {
     export function isShake(pin: XY_Pin, num: number, a: Action): void { 
         while (true) {
             if (pin == XY_Pin.P1) {
-                num = (pins.analogReadPin(AnalogPin.P1) - 500) / 50;
+                num = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
             }
             else if (pin == XY_Pin.P2) { 
-                num = (pins.analogReadPin(AnalogPin.P2) - 500) / 50;
+                num = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
             }
             serial.writeNumber(num);
             if (num != 0) {
