@@ -4,18 +4,5 @@
 	"XY_Pin.P2|block": "摇杆 Y",
   "read.value_x|block": "摇杆 X",
   "read.value_x|block": "摇杆 Y",
-	"joystickEvent.Down|block": "按下",
-	"joystickEvent.Up|block": "松开",
-	"joystickEvent.Click|block": "点击",
-	"joystick.Vibrator.V0|block": "停止",
-	"joystick.Vibrator.V1|block": "振动",
-	"joystick.Led.OFF|block": "灭",
-	"joystick.Led.ON|block": "亮",
-  "joystick.pressedZ|block":"摇杆 Z 被按下",
-  "joystick.ZState|block":"摇杆 Z |%event|"
-	"joystick.vibratorMotor|block": "振动电机 |%index|",
-	"joystick.vibratorMotorSpeed|block": "振动电机 强度|%degree|", 
-  "joystick.compare|block":"摇杆|%read_|%compare_|%value_",
-  "joystick.action|block":"摇杆|%pin|摇动 幅度%value",
-	"joystick.led|block": "LED|%index|"
+
 }
