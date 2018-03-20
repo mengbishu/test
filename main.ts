@@ -103,6 +103,19 @@ namespace joystick {
         control.onEvent(<number>DAL.MICROBIT_ID_IO_P8, <number>event, handler); // register handler
     }
 
+    //% weight=60
+    //% blockGap=50
+    //% blockId=gamePad_onEvent block="on button|%button|is %event"
+    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
+    //% event.fieldEditor="gridpicker" event.fieldOptions.columns=3
+    export function aEvent(button: Z_Pin, event: joystickEvent, handler: Action) {
+        init();
+        if (!PIN_INIT) { 
+            PinInit();
+        }
+        control.onEvent(<number>button, <number>event, handler); // register handler
+    }
+
     /**
      * Vibrating motor switch.
      */
