@@ -176,7 +176,7 @@ namespace joystick {
         while (true) {
             num = pin;
             serial.writeNumber(pin)
-            if (pin != 0) {
+            if (pin == 0) {
                 led(Led.OFF);
                 
                 Shake(pin, num, a);
