@@ -1,7 +1,7 @@
 {
     "name": "joystick",
     "version": "0.0.0",
-    "description": "This library is DFRobot joystick provides the game handle control function.",
+    "description": "micronit",
     "license": "MIT",
     "dependencies": {
         "core": "*",
