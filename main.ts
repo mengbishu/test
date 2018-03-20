@@ -172,11 +172,17 @@ namespace joystick {
     //% weight=60
     //% blockGap=40
     //% blockId=action block="joystick on| %pin|is shake, value %value"
-    export function isShake(pin: read, num: number, a: Action): void { 
+    export function isShake(pin: XY_Pin, num: number, a: Action): void { 
         while (true) {
-            num = pin;
-            serial.writeNumber(pin)
-            if (pin == 0) {
+            if (pin == XY_Pin.P1) {
+                num = (pins.analogReadPin(AnalogPin.P1) - 500) / 50;
+            }
+            else if (pin == XY_Pin.P2) { 
+                num = (pins.analogReadPin(AnalogPin.P2) - 500) / 50;
+            }
+
+            
+            if (num != 0) {
                 led(Led.OFF);
                 basic.pause(1000);
                 Shake(pin, num, a);
