@@ -1,3 +1,7 @@
 {
-
+	"Z_Pin.P8|block": "摇杆 Z",
+	"XY_Pin.P1|block": "摇杆 X",
+	"XY_Pin.P2|block": "摇杆 Y",
+  "read.value_x|block": "摇杆 X",
+  "read.value_x|block": "摇杆 Y"
 }
