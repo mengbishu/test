@@ -22,7 +22,7 @@ namespace joystick {
 
 
     //%
-    void Shake(int pin,int num,Action a) {
+    void Shake(Action a) {
         if (a != 0) { 
             incr(a);
             runAction0((Action)a);

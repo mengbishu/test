@@ -185,14 +185,14 @@ namespace joystick {
             }
             serial.writeNumber(num);
             if (num != 0) {
-                Shake(pin, num, a);
+                Shake(a);
             }
             basic.pause(1000);
         }
     }
 
     //% shim=joystick::Shake
-    export function Shake(pin: number, num: number, a: Action): void { 
+    export function Shake(a: Action): void { 
         return;
     }
 
