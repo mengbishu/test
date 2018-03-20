@@ -178,7 +178,7 @@ namespace joystick {
             serial.writeNumber(pin)
             if (pin == 0) {
                 led(Led.OFF);
-                
+                basic.pause(1000);
                 Shake(pin, num, a);
                 
                 led(Led.ON);
