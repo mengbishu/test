@@ -181,13 +181,8 @@ namespace joystick {
                 num = (pins.analogReadPin(AnalogPin.P2) - 500) / 50;
             }
 
-            
             if (num != 0) {
-                led(Led.OFF);
-                basic.pause(1000);
                 Shake(pin, num, a);
-                
-                led(Led.ON);
             }
             basic.pause(1000);
         }
