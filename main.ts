@@ -194,7 +194,33 @@ namespace joystick {
     }
 
     export class Packet {
+        /**
+         * The number payload if a number was sent in this packet (via ``sendNumber()`` or ``sendValue()``)
+         * or 0 if this packet did not contain a number.
+         */
         public receivedNumber: number;
+        /**
+         * The string payload if a string was sent in this packet (via ``sendString()`` or ``sendValue()``)
+         * or the empty string if this packet did not contain a string.
+         */
+        public receivedString: string;
+        /**
+         * The buffer payload if a buffer was sent in this packet
+         * or the empty buffer
+         */
+        public receivedBuffer: Buffer;
+        /**
+         * The system time of the sender of the packet at the time the packet was sent.
+         */
+        public time: number;
+        /**
+         * The serial number of the sender of the packet or 0 if the sender did not sent their serial number.
+         */
+        public serial: number;
+        /**
+         * The received signal strength indicator (RSSI) of the packet.
+         */
+        public signal: number;
     }
 
     export function onDataReceivedaa(body: () => void): void{
@@ -205,6 +231,13 @@ namespace joystick {
         return;
     }
 
+    /**
+     * Registers code to run when the radio receives a packet. Also takes the
+     * received packet from the radio queue.
+     */
+    //% help=radio/on-data-packet-received
+    //% mutate=objectdestructuring
+    //% mutateText=Packet
     //% mutateDefaults="receivedNumber;receivedString:name,receivedNumber:value;receivedString"
     //% blockId=radio block="on radio " blockGap=8
     export function onDataPacketReceived(cb: (packet: Packet) => void) {
