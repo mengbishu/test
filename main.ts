@@ -187,7 +187,7 @@ namespace joystick {
             if (num != 0) {
                 Shake(pin, num, a);
             }
-            basic.pause(50);
+            basic.pause(1000);
         }
     }
 
