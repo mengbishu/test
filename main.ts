@@ -103,19 +103,6 @@ namespace joystick {
         control.onEvent(<number>DAL.MICROBIT_ID_IO_P8, <number>event, handler); // register handler
     }
 
-    //% weight=60
-    //% blockGap=50
-    //% blockId=gamePad_onEvent block="on button|is %event"
-    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
-    //% event.fieldEditor="gridpicker" event.fieldOptions.columns=3
-    export function aEvent( event: joystickEvent, handler: Action) {
-        init();
-        if (!PIN_INIT) { 
-            PinInit();
-        }
-        control.onEvent(<number>DAL.MICROBIT_ID_IO_P8, <number>event, handler); // register handler
-    }
-
     /**
      * Vibrating motor switch.
      */
@@ -182,7 +169,7 @@ namespace joystick {
         else if (pin == XY_Pin.P2) { 
             num = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
         }
-        serial.writeNumber(num);
+        //serial.writeNumber(num);
         if (num != 0) {
             Shake(a);
         }
@@ -204,5 +191,20 @@ namespace joystick {
             PinInit();
         }
         pins.digitalWritePin(DigitalPin.P16, <number>index);
+    }
+
+    export class Packet{
+        public num: number;
+    }
+
+    //% weight=60
+    //% blockGap=40
+    //% blockId=aaaa block="aaaaaaa on value %value"
+    export function aaaaa(cb: (packet: Packet) => void) {
+        Shake(() => {
+            const packet = new Packet();
+            packet.num = (pins.analogReadPin(AnalogPin.P1)-512)/50;
+            cb(packet)
+        });
     }
 }
