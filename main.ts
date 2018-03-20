@@ -211,10 +211,10 @@ namespace joystick {
     //% mutateText=Packet
     //% mutateDefaults="receivedNumber;receivedString:name,receivedNumber:value;receivedString"
     //% blockId=radio block="on radio " blockGap=8
-    export function onDataPacketReceived(cb: (packet: Packet) => void) {
+    export function onData(cb: (packet: Packet) => void) {
         Shake(() => {
             const packet = new Packet();
-            packet.receivedNumber = receivedNumber();
+            packet.receivedNumber = (pins.analogReadPin(AnalogPin.P1) - 512) / 50
             cb(packet)
         });
     }
