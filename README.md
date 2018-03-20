@@ -1,43 +1,22 @@
 # joystick
 
-Micro:bit joystick expansion board.
-![image]()
----------------------------------------------------------
+micronit
 
-## Table of Contents
+## TODO
 
-* [Summary](#summary)
-* [Blocks](#blocks)
-* [License](#license)
+- [ ] Add a reference for your blocks here
+- [ ] Add "icon.png" image (300x200) in the root folder
+- [ ] Add "- beta" to the GitHub project description if you are still iterating it.
+- [ ] Turn on your automated build on https://travis-ci.org
+- [ ] Use "pxt bump" to create a tagged release on GitHub
+- [ ] Get your package reviewed and approved https://makecode.microbit.org/packages/approval
 
-## Summary
- 
-Micro:bit joystick is based on micro:bit. All you need to do is plug in micro:bit board. 
-There are 2 buttons and 1 joystick in the Micro:bit joystick. 
-The two buttons are A and B, and joystick can control x and y. 
-This board also has built-in vibration motor and LED which can be controlled by programming. 
-The programming platform supports makecode graphical programming and python programming, 
-which is an ideal tool for programming from entry and even to advanced programming education.
-
-
-## Blocks
-
-### 1.LED control
-
-
-### 2.Vibration motor control
-
-
-### 3.
-
-
-### 4.
-
-
+Read more at https://makecode.microbit.org/packages/build-your-own
 
 ## License
 
-MIT
+yes
+
 ## Supported targets
 
 * for PXT/microbit
