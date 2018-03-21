@@ -184,23 +184,23 @@ namespace joystick {
     //% help=radio/on-data-packet-received
     //% mutate=objectdestructuring
     //% mutateText=Packet
-    //% mutateDefaults="Number"
-    //% blockId=radio block="joystick on %pin is %cb" blockGap=8
+    //% mutateDefaults="amplitude:a"
+    //% blockId=radio block="joystick on %pin" blockGap=8
     export function onData(pin: XY_Pin,cb: (packet: Packet) => void) {
         Shake(() => {
             const packet = new Packet();
             if (pin == XY_Pin.P1) {
-                packet.Number = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
+                packet.amplitude = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
             }
             else if (pin == XY_Pin.P2) { 
-                packet.Number = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
+                packet.amplitude = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
             }
             cb(packet);
         });
     }
 
     export class Packet {
-        public Number: number;
+        public amplitude: number;
     }
     
     /**
