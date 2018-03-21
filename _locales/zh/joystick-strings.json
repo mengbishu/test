@@ -17,5 +17,5 @@
 	"joystick.vibratorMotorSpeed|block": "振动电机 强度|%degree|", 
   "joystick.compare|block": "摇杆|%read_|%compare_|%value_",
   "joystick.action|block": "摇杆| %pin|摇动 幅度 %value",
-	"joystick.ZState|block": "LED|%event|"
+	"joystick.ZState|block": "摇杆 Z |%event|"
 }
