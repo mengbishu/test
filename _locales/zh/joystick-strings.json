@@ -3,7 +3,7 @@
 	"XY_Pin.P1|block": "摇杆X",
 	"XY_Pin.P2|block": "摇杆Y",
   "joystick.read.value_x|block": "摇杆X",
-  "joystick.read.value_x|block": "摇杆Y",
+  "joystick.read.value_y|block": "摇杆Y",
 	"joystick.joystickEvent.Down|block": "按下",
 	"joystick.joystickEvent.Up|block": "松开",
 	"joystick.joystickEvent.Click|block": "点击",
