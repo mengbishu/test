@@ -185,7 +185,7 @@ namespace joystick {
     //% mutate=objectdestructuring
     //% mutateText=Packet
     //% mutateDefaults="Number"
-    //% blockId=radio block="joystick on %pin is " blockGap=8
+    //% blockId=radio block="joystick on %pin is %cb" blockGap=8
     export function onData(pin: XY_Pin,cb: (packet: Packet) => void) {
         Shake(() => {
             const packet = new Packet();
