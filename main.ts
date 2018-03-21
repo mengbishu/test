@@ -1,9 +1,9 @@
 /**
- * User Buttons for DFRobot gamer:bit Players.
+ * User Buttons for DFRobot joystick.
  */
 //%
 enum Z_Pin {
-    //% blockId="V0" block="Z button"
+    //% blockId="P8" block="Z button"
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
 }
 
@@ -89,7 +89,7 @@ namespace joystick {
     }
 
     /**
-     * Registers code to run when a DFRobot gamer:bit event is detected.
+     * Registers code to run when a DFRobot joystick event is detected.
      */
     //% blockId=ZState block="joystick Z is %event"
     export function onEvent(event: joystickEvent, handler: Action) {
@@ -147,31 +147,11 @@ namespace joystick {
         return false;
     }
     
-
-    /**
-     * Detect the analog value of the rocker.
-     */
-    //% blockId=action block="joystick on| %pin|is shake, value %value"
-    export function isShake(pin: XY_Pin, num: number, a: Action): void { 
-        if (pin == XY_Pin.P1) {
-            num = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
-        }
-        else if (pin == XY_Pin.P2) { 
-            num = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
-        }
-        //serial.writeNumber(num);
-        if (num != 0) {
-            Shake(a);
-        }
-        basic.pause(1000);
-    }
-
     //% shim=joystick::Shake
     export function Shake(a: Action): void { 
         return;
     }
 
- 
     //% help=radio/on-data-packet-received
     //% mutate=objectdestructuring
     //% mutateText=Packet
