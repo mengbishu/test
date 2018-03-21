@@ -52,7 +52,7 @@ namespace joystick {
 
     
     export enum compare{
-       //% block='>'
+        //% block='>'
         a = 1,
         //% block='='
         b = 2,
@@ -76,7 +76,6 @@ namespace joystick {
         return;
     }
 
-    //% weight=70
     //% blockId=pressedZ block="joystick Z is pressed"
     export function pressed(): boolean { 
         if (!PIN_INIT) { 
@@ -92,8 +91,6 @@ namespace joystick {
     /**
      * Registers code to run when a DFRobot gamer:bit event is detected.
      */
-    //% weight=60
-    //% blockGap=50
     //% blockId=ZState block="joystick Z is %event"
     export function onEvent(event: joystickEvent, handler: Action) {
         init();
@@ -106,7 +103,6 @@ namespace joystick {
     /**
      * Vibrating motor switch.
      */
-    //% weight=50
     //% blockId=vibratorMotor block="Vibrator motor switch|%index|"
     export function vibratorMotor(index: Vibrator): void {
         vibratorMotorSpeed(<number>index);
@@ -116,8 +112,6 @@ namespace joystick {
     /**
      * Vibration motor speed setting, adjustable range 0~255.
      */
-    //% weight=30
-    //% blockGap=50
     //% blockId=vibratorMotorSpeed block="Vibrator motor intensity|%degree"
     //% degree.min=0 degree.max=255
     export function vibratorMotorSpeed(degree: number): void {
@@ -132,8 +126,6 @@ namespace joystick {
     /**
      * Detect the analog value of the rocker.
      */
-    //% weight=60
-    //% blockGap=40
     //% blockId=compare block="joystick|%read_|%compare_|%value_"
     //% value_.min=-10 value_.max=10
     export function detect(read_: read, compare_: compare, value_: number): boolean { 
@@ -159,8 +151,6 @@ namespace joystick {
     /**
      * Detect the analog value of the rocker.
      */
-    //% weight=160
-    //% blockGap=60
     //% blockId=action block="joystick on| %pin|is shake, value %value"
     export function isShake(pin: XY_Pin, num: number, a: Action): void { 
         if (pin == XY_Pin.P1) {
@@ -181,8 +171,7 @@ namespace joystick {
         return;
     }
 
-    //% weight=160
-    //% blockGap=40    
+ 
     //% help=radio/on-data-packet-received
     //% mutate=objectdestructuring
     //% mutateText=Packet
@@ -208,7 +197,6 @@ namespace joystick {
     /**
      * LED indicator light switch.
      */
-    //% weight=20
     //% blockId=joystick_led block="LED|%index|"
     export function led(index: Led): void {
         if (!PIN_INIT) { 
