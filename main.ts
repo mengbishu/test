@@ -181,6 +181,27 @@ namespace joystick {
         return;
     }
 
+    //% help=radio/on-data-packet-received
+    //% mutate=objectdestructuring
+    //% mutateText=Packet
+    //% blockId=radio block="aaaaaaaon radio %pin" blockGap=8
+    export function onData(pin: XY_Pin,cb: (packet: Packet) => void) {
+        Shake(() => {
+            const packet = new Packet();
+            if (pin == XY_Pin.P1) {
+                packet.receivedNumber = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
+            }
+            else if (pin == XY_Pin.P2) { 
+                packet.receivedNumber = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
+            }
+            cb(packet);
+        });
+    }
+
+    export class Packet {
+        public receivedNumber: number;
+    }
+    
     /**
      * LED indicator light switch.
      */
@@ -191,22 +212,5 @@ namespace joystick {
             PinInit();
         }
         pins.digitalWritePin(DigitalPin.P16, <number>index);
-    }
-
-    export class Packet {
-        public receivedNumber: number;
-    }
-
-    //% help=radio/on-data-packet-received
-    //% mutate=objectdestructuring
-    //% mutateText=Packet
-    //% mutateDefaults="receivedNumber;receivedString:name,receivedNumber:value;receivedString"
-    //% blockId=radio block="on radio " blockGap=8
-    export function onData(cb: (packet: Packet) => void) {
-        Shake(() => {
-            const packet = new Packet();
-            packet.receivedNumber = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
-            cb(packet);
-        });
     }
 }
