@@ -181,7 +181,7 @@ namespace joystick {
         return;
     }
 
-    //% weight=60
+    //% weight=160
     //% blockGap=40    
     //% help=radio/on-data-packet-received
     //% mutate=objectdestructuring
