@@ -12,8 +12,8 @@
 	"joystick.Led.OFF|block": "灭",
 	"joystick.Led.ON|block": "亮",
   "joystick.pressedZ|block": "摇杆 Z 被按下",
-
-	"joystick.ZState|block": "振动电机 |%event|",
+  "joystick.ZState|block": "摇杆 Z |%event|",
+	"joystick.vibratorMotor|block": "振动电机 |%index|",
 	"joystick.vibratorMotorSpeed|block": "振动电机 强度|%degree|", 
   "joystick.compare|block": "摇杆|%read_|%compare_|%value_",
   "joystick.action|block": "摇杆| %pin|摇动 幅度 %value",
