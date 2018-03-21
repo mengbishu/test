@@ -117,9 +117,9 @@ namespace joystick {
         return;
     }
 
-    //% blockId=compare block="joystick|%read_|%compare_|%value_"
+    //% blockId=joystick_compare block="joystick|%read_|%compare_|%value_"
     //% value_.min=-10 value_.max=10
-    export function detect(read_: read, compare_: compare, value_: number): boolean { 
+    export function joystick_compare(read_: read, compare_: compare, value_: number): boolean { 
         if (compare_ == 1) { 
             if (read_ > value_) { 
                 return true;
@@ -147,8 +147,8 @@ namespace joystick {
     //% mutate=objectdestructuring
     //% mutateText=Packet
     //% mutateDefaults="amplitude"
-    //% blockId=radio block="joystick on %pin " blockGap=8
-    export function onData(pin: XY_Pin,cb: (packet: Packet) => void) {
+    //% blockId=action block="joystick on %pin " blockGap=8
+    export function action(pin: XY_Pin,cb: (packet: Packet) => void) {
         Shake(() => {
             const packet = new Packet();
             if (pin == XY_Pin.P1) {
