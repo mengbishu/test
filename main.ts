@@ -157,6 +157,9 @@ namespace joystick {
             else if (pin == XY_Pin.P2) { 
                 packet.amplitude = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
             }
+            if (packet.amplitude == 0) { 
+                return;
+            }
             //serial.writeNumber(packet.amplitude);
             cb(packet);
         });
