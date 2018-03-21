@@ -88,9 +88,6 @@ namespace joystick {
         return num;
     }
 
-    /**
-     * Registers code to run when a DFRobot joystick event is detected.
-     */
     //% blockId=ZState block="joystick Z is %event"
     export function onEvent(event: joystickEvent, handler: Action) {
         init();
@@ -100,18 +97,14 @@ namespace joystick {
         control.onEvent(<number>DAL.MICROBIT_ID_IO_P8, <number>event, handler); // register handler
     }
 
-    /**
-     * Vibrating motor switch.
-     */
+    
     //% blockId=vibratorMotor block="Vibrator motor switch|%index|"
     export function vibratorMotor(index: Vibrator): void {
         vibratorMotorSpeed(<number>index);
         return;
     }
 
-    /**
-     * Vibration motor speed setting, adjustable range 0~255.
-     */
+ 
     //% blockId=vibratorMotorSpeed block="Vibrator motor intensity|%degree"
     //% degree.min=0 degree.max=255
     export function vibratorMotorSpeed(degree: number): void {
@@ -123,9 +116,6 @@ namespace joystick {
         return;
     }
 
-    /**
-     * Detect the analog value of the rocker.
-     */
     //% blockId=compare block="joystick|%read_|%compare_|%value_"
     //% value_.min=-10 value_.max=10
     export function detect(read_: read, compare_: compare, value_: number): boolean { 
@@ -173,10 +163,7 @@ namespace joystick {
     export class Packet {
         public amplitude: number;
     }
-    
-    /**
-     * LED indicator light switch.
-     */
+
     //% blockId=joystick_led block="LED|%index|"
     export function led(index: Led): void {
         if (!PIN_INIT) { 
