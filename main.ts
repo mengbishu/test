@@ -181,11 +181,13 @@ namespace joystick {
         return;
     }
 
+    //% weight=60
+    //% blockGap=40    
     //% help=radio/on-data-packet-received
     //% mutate=objectdestructuring
     //% mutateText=Packet
-    //% mutateDefaults=" , amplitude:aaa"
-    //% blockId=radio block="joystick on %pin ss" blockGap=8
+    //% mutateDefaults="amplitude"
+    //% blockId=radio block="joystick on %pin " blockGap=8
     export function onData(pin: XY_Pin,cb: (packet: Packet) => void) {
         Shake(() => {
             const packet = new Packet();
