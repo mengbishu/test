@@ -77,7 +77,7 @@ namespace joystick {
     }
 
     //% blockId=pressedZ block="joystick Z is pressed"
-    export function pressed(): boolean { 
+    export function pressedZ(): boolean { 
         if (!PIN_INIT) { 
             PinInit();
         }
@@ -90,7 +90,7 @@ namespace joystick {
 
 
     //% blockId=ZState block="joystick Z is %event"
-    export function onEvent(event: joystickEvent, handler: Action) {
+    export function ZState(event: joystickEvent, handler: Action) {
         init();
         if (!PIN_INIT) { 
             PinInit();
