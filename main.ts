@@ -77,7 +77,7 @@ namespace joystick {
     }
 
     //% blockId=pressedZ block="joystick Z is pressed"
-    export function pressedZ(): boolean { 
+    export function pressed(): boolean { 
         if (!PIN_INIT) { 
             PinInit();
         }
@@ -88,8 +88,9 @@ namespace joystick {
         return num;
     }
 
+
     //% blockId=ZState block="joystick Z is %event"
-    export function ZState(event: joystickEvent, handler: Action) {
+    export function onEvent(event: joystickEvent, handler: Action) {
         init();
         if (!PIN_INIT) { 
             PinInit();
@@ -118,7 +119,7 @@ namespace joystick {
 
     //% blockId=compare block="joystick|%read_|%compare_|%value_"
     //% value_.min=-10 value_.max=10
-    export function compare(read_: read, compare_: compare, value_: number): boolean { 
+    export function detect(read_: read, compare_: compare, value_: number): boolean { 
         if (compare_ == 1) { 
             if (read_ > value_) { 
                 return true;
@@ -142,12 +143,12 @@ namespace joystick {
         return;
     }
 
-
+    //% help=radio/on-data-packet-received
     //% mutate=objectdestructuring
     //% mutateText=Packet
     //% mutateDefaults="amplitude"
-    //% blockId=action block="joystick on %pin " blockGap=8
-    export function action(pin: XY_Pin,cb: (packet: Packet) => void) {
+    //% blockId=radio block="joystick on %pin " blockGap=8
+    export function onData(pin: XY_Pin,cb: (packet: Packet) => void) {
         Shake(() => {
             const packet = new Packet();
             if (pin == XY_Pin.P1) {
@@ -164,7 +165,7 @@ namespace joystick {
         public amplitude: number;
     }
 
-    //% blockId=led block="LED|%index|"
+    //% blockId=joystick_led block="LED|%index|"
     export function led(index: Led): void {
         if (!PIN_INIT) { 
             PinInit();
