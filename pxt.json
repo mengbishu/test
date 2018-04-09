@@ -1,20 +1,28 @@
 {
-    "name": "joystick",
-    "version": "0.0.0",
-    "description": "This library is DFRobot joystick provides the game handle control function.",
+    "name": "pixel",
+    "version": "0.6.2",
+    "description": "Pixel driver",
     "license": "MIT",
     "dependencies": {
         "core": "*",
-        "radio": "*"
+        "ws2812b": "github:Microsoft/pxt-ws2812b#v0.0.4"
     },
     "files": [
         "README.md",
-        "main.ts",
-        "joystick.cpp",
-        "_locales/zh/joystick-strings.json"
+        "test.ts",
     ],
     "testFiles": [
-        "test.ts"
+        "neotest.ts"
     ],
-    "public": false
+    "yotta": {
+        "config": {
+            "microbit-dal": {
+                "bluetooth": {
+                    "enabled": 0
+                }
+            }
+        }
+        
+    },
+    "public": true
 }
