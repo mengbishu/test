@@ -1,5 +1,5 @@
 {
-    "name": "neopixel",
+    "name": "pixel",
     "version": "0.6.2",
     "description": "AdaFruit NeoPixel driver",
     "license": "MIT",
