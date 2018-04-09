@@ -244,13 +244,12 @@ namespace pixel {
         //% help=basic/show-leds
         //% weight=95 blockGap=8
         //% imageLiteral=1 async
-        //% blockId=device_show_leds
-        //% block="show leds" icon="\uf00a"
+        //% blockId=device_leds
+        //% block="show leds" 
         //% parts="ledmatrix"
         showLeds(leds: number, interval: number = 400): void {
             this.setPixelRGB(10, 10);
         }
-
     }
 
     /**
