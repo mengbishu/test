@@ -244,7 +244,7 @@ namespace pixel {
         //% help=basic/show-leds
         //% weight=95 blockGap=8
         //% imageLiteral=1 async
-        //% blockId=device_leds
+        //% blockId=Leds
         //% block="show leds" 
         //% parts="ledmatrix"
         Leds(leds: string, interval?: number): void {
