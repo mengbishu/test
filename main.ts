@@ -244,10 +244,10 @@ namespace pixel {
         //% help=basic/show-leds
         //% weight=95 blockGap=8
         //% imageLiteral=1 async
-        //% blockId=Leds
+        //% blockId=device_leds
         //% block="show leds" 
         //% parts="ledmatrix"
-        Leds(leds: string, interval: number): void {
+        showLeds(leds: number, interval: number = 400): void {
             this.setPixelRGB(10, 10);
         }
     }
