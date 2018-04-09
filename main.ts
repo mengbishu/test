@@ -241,15 +241,7 @@ namespace pixel {
             buf[pixeloffset + 3] = white;
         }
 
-        //% help=basic/show-leds
-        //% weight=95 blockGap=8
-        //% imageLiteral=1 async
-        //% blockId=device_leds
-        //% block="show leds" 
-        //% parts="ledmatrix"
-        lleds(leds: number, interval: number = 400): void {
-            this.setPixelRGB(10, 10);
-        }
+
     }
 
     /**
