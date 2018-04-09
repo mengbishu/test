@@ -1,3 +1,5 @@
+
+
 /**
  * Well known colors for a NeoPixel strip
  */
@@ -302,4 +304,5 @@ namespace pixel {
         let b = (rgb) & 0xFF;
         return b;
     }
+    
 }
