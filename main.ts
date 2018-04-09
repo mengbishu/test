@@ -242,8 +242,9 @@ namespace pixel {
             let buf = this.buf;
             buf[pixeloffset + 3] = white;
         }
-        
-            /**
+    }
+
+    /**
      * Create a new NeoPixel driver for `numleds` LEDs.
      * @param pin the pin where the neopixel is connected.
      * @param numleds number of leds in the strip, eg: 24,30,60,64
@@ -303,8 +304,5 @@ namespace pixel {
         let b = (rgb) & 0xFF;
         return b;
     }
-    }
-
-
     
 }
