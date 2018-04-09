@@ -247,7 +247,7 @@ namespace pixel {
         //% blockId=Leds
         //% block="show leds" 
         //% parts="ledmatrix"
-        Leds(leds: string, interval?: number): void {
+        Leds(leds: string, interval: number): void {
             this.setPixelRGB(10, 10);
         }
     }
