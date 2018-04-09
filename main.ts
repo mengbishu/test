@@ -1,5 +1,3 @@
-
-
 /**
  * Well known colors for a NeoPixel strip
  */
@@ -242,6 +240,17 @@ namespace pixel {
             let buf = this.buf;
             buf[pixeloffset + 3] = white;
         }
+
+        //% help=basic/show-leds
+        //% weight=95 blockGap=8
+        //% imageLiteral=1 async
+        //% blockId=device_show_leds
+        //% block="show leds" icon="\uf00a"
+        //% parts="ledmatrix"
+        showLeds(leds: number, interval: number = 400): void {
+            this.setPixelRGB(10, 10);
+        }
+
     }
 
     /**
@@ -302,5 +311,6 @@ namespace pixel {
         let b = (rgb) & 0xFF;
         return b;
     }
+
     
 }
