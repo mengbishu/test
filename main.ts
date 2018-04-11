@@ -10,11 +10,11 @@ enum Z_Pin {
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
 }
 
-export enum XY_Pin { 
+enum XY_Pin { 
     //% blockId="P1" block="X"
-    pin1 = <number>DAL.MICROBIT_ID_IO_P1,
+    P1 = <number>DAL.MICROBIT_ID_IO_P1,
     //% blockId="P2" block="Y"
-    pin2 = <number>DAL.MICROBIT_ID_IO_P2
+    P2 = <number>DAL.MICROBIT_ID_IO_P2
 }
 
 //% weight=10 color=#DF6721 icon="\uf11b" block="joystick"
@@ -126,10 +126,10 @@ namespace joystick {
             PinInit();
         }
         let temp=0;
-        if (read_ == XY_Pin.pin1) {
+        if (read_ == XY_Pin.P1) {
             temp = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
         }
-        else if (read_ == XY_Pin.pin2) { 
+        else if (read_ == XY_Pin.P2) { 
             temp = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
         }
         if (compare_ == 1) { 
@@ -153,10 +153,10 @@ namespace joystick {
     //% blockId=getXY block="get joystick on |%pin|" 
     export function getXY(pin: XY_Pin): number { 
         let val=0;
-        if (pin == XY_Pin.pin1) {
+        if (pin == XY_Pin.P1) {
             val = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
         }
-        else if (pin == XY_Pin.pin2) { 
+        else if (pin == XY_Pin.P2) { 
             val = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
         }
         return val;
@@ -179,10 +179,10 @@ namespace joystick {
                 PinInit();
             }
             const packet = new Packet();
-            if (pin == XY_Pin.pin1) {
+            if (pin == XY_Pin.P1) {
                 packet.amplitude = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
             }
-            else if (pin == XY_Pin.pin2) { 
+            else if (pin == XY_Pin.P2) { 
                 packet.amplitude = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
             }
             if (packet.amplitude == 0) { 
