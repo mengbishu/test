@@ -39,11 +39,75 @@ enum NeoPixelMode {
 /**
  * Functions to operate NeoPixel strips.
  */
-//% weight=5 color=#2699BF icon="\uf110"
+//% color=#0078D7 icon="\uf00a"
 namespace pixel {
     /**
      * A NeoPixel strip
      */
+    let chrs: string[] = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    let chr:number[] = [0x3C,0x66,0x42,0x42,0x42,0x66,0x3C,0x00,
+        0x10,0x70,0x10,0x10,0x10,0x10,0x7C,0x00,
+        0x3C,0x42,0x02,0x04,0x18,0x22,0x7E,0x00,
+        0x3C,0x42,0x02,0x1C,0x02,0x42,0x3C,0x00,
+        0x0C,0x14,0x24,0x44,0x7E,0x04,0x0C,0x00,
+        0x7E,0x40,0x7C,0x02,0x02,0x42,0x3C,0x00,
+        0x3C,0x20,0x40,0x7C,0x42,0x42,0x3C,0x00,
+        0x7E,0x44,0x08,0x10,0x10,0x10,0x10,0x00,
+        0x3C,0x42,0x42,0x3C,0x42,0x42,0x3C,0x00,
+        0x38,0x46,0x42,0x3E,0x02,0x04,0x3C,0x00,
+        0x10,0x18,0x28,0x24,0x7C,0x42,0xE7,0x00,
+        0xFC,0x44,0x78,0x46,0x42,0x42,0xFC,0x00,
+        0x3E,0x42,0x80,0x80,0x80,0x42,0x3C,0x00,
+        0xF8,0x46,0x42,0x42,0x42,0x44,0xF8,0x00,
+        0xFC,0x42,0x40,0x78,0x40,0x46,0xFC,0x00,
+        0xFC,0x42,0x48,0x78,0x48,0x40,0xE0,0x00,
+        0x3C,0xC4,0x80,0x80,0x8E,0x44,0x78,0x00,
+        0xE7,0x42,0x42,0x7E,0x42,0x42,0xE7,0x00,
+        0x7C,0x10,0x10,0x10,0x10,0x10,0x7C,0x00,
+        0x3E,0x08,0x08,0x08,0x08,0x08,0x08,0xF0,
+        0xFE,0x48,0x70,0x70,0x48,0x44,0xEE,0x00,
+        0xE0,0x40,0x40,0x40,0x40,0x42,0xFE,0x00,
+        0xEE,0x6C,0x6C,0x54,0x54,0x54,0xC6,0x00,
+        0xC7,0x62,0x52,0x4A,0x4A,0x46,0xE2,0x00,
+        0x3C,0x46,0x82,0x82,0x82,0x44,0x38,0x00,
+        0xFC,0x42,0x42,0x7C,0x40,0x40,0xE0,0x00,
+        0x78,0xC6,0x82,0x82,0xB2,0xCE,0x38,0x06,
+        0xFE,0x42,0x7C,0x48,0x44,0x46,0xE3,0x00,
+        0x3E,0x42,0x60,0x18,0x06,0x42,0x7C,0x00,
+        0xFE,0x92,0x10,0x10,0x10,0x10,0x38,0x00,
+        0xE7,0x42,0x42,0x42,0x42,0x42,0x3C,0x00,
+        0xE7,0x42,0x64,0x24,0x28,0x18,0x10,0x00,
+        0xD6,0x92,0x92,0xAA,0xAE,0x44,0x44,0x00,
+        0xE7,0x66,0x24,0x18,0x34,0x26,0xE7,0x00,
+        0xEE,0x44,0x28,0x10,0x10,0x10,0x38,0x00,
+        0x7E,0x84,0x08,0x10,0x20,0x42,0xFC,0x00,
+        0x00,0x00,0x3C,0x42,0x3E,0x42,0x3F,0x00,
+        0xC0,0x40,0x5C,0x62,0x42,0x42,0x7C,0x00,
+        0x00,0x00,0x3C,0x62,0x40,0x42,0x3C,0x00,
+        0x06,0x02,0x1E,0x62,0x42,0x42,0x3F,0x00,
+        0x00,0x00,0x3C,0x42,0x7E,0x40,0x3E,0x00,
+        0x0F,0x10,0x7E,0x10,0x10,0x10,0x7C,0x00,
+        0x00,0x00,0x3E,0x44,0x38,0x60,0x5E,0x7E,
+        0xC0,0x40,0x5C,0x62,0x42,0x42,0xE7,0x00,
+        0x30,0x00,0x70,0x10,0x10,0x10,0x7C,0x00,
+        0x0C,0x00,0x1C,0x04,0x04,0x04,0x04,0x78,
+        0xC0,0x40,0x4E,0x58,0x70,0x48,0xEE,0x00,
+        0x70,0x10,0x10,0x10,0x10,0x10,0x7C,0x00,
+        0x00,0x00,0xFF,0x49,0x49,0x49,0xED,0x00,
+        0x00,0x00,0xD8,0x66,0x42,0x42,0xE7,0x00,
+        0x00,0x00,0x3C,0x42,0x42,0x42,0x3C,0x00,
+        0x00,0x00,0xF8,0x46,0x42,0x42,0x7C,0xE0,
+        0x00,0x00,0x3E,0x42,0x42,0x42,0x3E,0x07,
+        0x00,0x00,0xEE,0x30,0x20,0x20,0xF8,0x00,
+        0x00,0x00,0x3E,0x40,0x3C,0x42,0x7C,0x00,
+        0x10,0x10,0x7C,0x10,0x10,0x10,0x0C,0x00,
+        0x00,0x00,0xC6,0x42,0x42,0x42,0x3F,0x00,
+        0x00,0x00,0xE7,0x46,0x24,0x28,0x10,0x00,
+        0x00,0x00,0xD7,0x92,0xAA,0x6A,0x44,0x00,
+        0x00,0x00,0x6E,0x3C,0x18,0x3C,0x76,0x00,
+        0x00,0x00,0xE7,0x66,0x3C,0x18,0x10,0xE0,
+        0x00, 0x00, 0x7E, 0x44, 0x18, 0x32, 0x7E, 0x00]
+    
     export class Strip {
         buf: Buffer;
         pin: DigitalPin;
@@ -54,10 +118,54 @@ namespace pixel {
         _mode: NeoPixelMode;
         _matrixWidth: number; // number of leds in a matrix - if any
 
-        /**
-         * Shows all LEDs to a given color (range 0-255 for r, g, b). 
-         * @param rgb RGB color of the LED
-         */
+        setPixel(x: number, y: number, color: number): void { 
+            let offset = y*8+x
+            this.setPixelColor(offset,color)
+        }        
+
+        setChar(ch: string, color: number): void { 
+            let i=0;
+            let j=0;
+            let index=0;
+            for (i = 0; i < 62; i++) { 
+                if (ch == chrs[i]) { 
+                    index = i;
+                }
+            }
+            index *= 8; 
+            for (i = 0; i < 8; i++) {
+                for (j = 0; j < 8; j++) {
+                    if (((chr[index+i] >> j) & 0x1) == 1) {
+                        this.setPixel(j, 7-i, color)
+                    }
+                }
+            }
+        }
+
+        //% blockId="showPixel" block="display pixel %x %y color %color"
+        //% x.min=0 x.max=8
+        //% y.min=0 y.max=8
+        showPixel(x: number, y: number, color: NeoPixelColors): void{
+            this.setPixel(x, y, color);
+        }
+
+        //% blockId="showNumber" block="show number %num color %color"
+        //% parts="neopixel"
+        showNumber(num:number,color:NeoPixelColors): void { 
+            this.showString(num.toString(),color)
+        }
+
+        //% blockId="showString" block="display string %str color %color"
+        showString(str: string, color: NeoPixelColors): void{
+            let len = str.length;
+            let i = 0;
+            for (i = 0; i < len; i++){
+                this.setChar(str[i], color);
+            }
+        }
+        
+
+
         //% blockId="neopixel_set_strip_color" block="%strip|show color %rgb=neopixel_colors" 
         //% weight=85 blockGap=8
         //% parts="neopixel"
@@ -66,12 +174,6 @@ namespace pixel {
             this.show();
         }
 
-        /**
-         * Set LED to a given color (range 0-255 for r, g, b). 
-         * You need to call ``show`` to make the changes visible.
-         * @param pixeloffset position of the NeoPixel in the strip
-         * @param rgb RGB color of the LED
-         */
         //% blockId="neopixel_set_pixel_color" block="%strip|set pixel color at %pixeloffset|to %rgb=neopixel_colors" 
         //% blockGap=8
         //% weight=80
@@ -80,9 +182,6 @@ namespace pixel {
             this.setPixelRGB(pixeloffset, rgb);
         }
 
-        /**
-         * Send all the changes to the strip.
-         */
         //% blockId="neopixel_show" block="%strip|show" blockGap=8
         //% weight=79
         //% parts="neopixel"
@@ -90,10 +189,6 @@ namespace pixel {
             ws2812b.sendBuffer(this.buf, this.pin);
         }
 
-        /**
-         * Turn off all LEDs.
-         * You need to call ``show`` to make the changes visible.
-         */
         //% blockId="neopixel_clear" block="%strip|clear"
         //% weight=76
         //% parts="neopixel"
@@ -102,19 +197,12 @@ namespace pixel {
             this.buf.fill(0, this.start * stride, this._length * stride);
         }
 
-        /**
-         * Gets the number of pixels declared on the strip
-         */
         //% blockId="neopixel_length" block="%strip|length" blockGap=8
         //% weight=60 
         length() {
             return this._length;
         }
 
-        /**
-         * Set the brightness of the strip. This flag only applies to future operation.
-         * @param brightness a measure of LED brightness in 0-255. eg: 255
-         */
         //% blockId="neopixel_set_brightness" block="%strip|set brightness %brightness" blockGap=8
         //% weight=59
         //% parts="neopixel" 
@@ -123,11 +211,7 @@ namespace pixel {
         }
 
 
-        /**
-         * Shift LEDs forward and clear with zeros.
-         * You need to call ``show`` to make the changes visible.
-         * @param offset number of pixels to shift forward, eg: 1
-         */
+
         //% blockId="neopixel_shift" block="%strip|shift pixels by %offset" blockGap=8
         //% weight=40
         //% parts="neopixel"
@@ -136,11 +220,6 @@ namespace pixel {
             this.buf.shift(-offset * stride, this.start * stride, this._length * stride)
         }
 
-        /**
-         * Rotate LEDs forward.
-         * You need to call ``show`` to make the changes visible.
-         * @param offset number of pixels to rotate forward, eg: 1
-         */
         //% blockId="neopixel_rotate" block="%strip|rotate pixels by %offset" blockGap=8
         //% weight=39
         //% parts="neopixel"
@@ -149,9 +228,6 @@ namespace pixel {
             this.buf.rotate(-offset * stride, this.start * stride, this._length * stride)
         }
 
-        /**
-         * Set the pin where the neopixel is connected, defaults to P0.
-         */
         //% weight=10
         //% parts="neopixel" 
         setPin(pin: DigitalPin): void {
@@ -242,12 +318,6 @@ namespace pixel {
         }
     }
 
-
-    /**
-     * Create a new NeoPixel driver for `numleds` LEDs.
-     * @param pin the pin where the neopixel is connected.
-     * @param numleds number of leds in the strip, eg: 24,30,60,64
-     */
     //% blockId="neopixel_create" block="NeoPixel at pin %pin|with %numleds|leds as %mode"
     //% weight=90 blockGap=8
     //% parts="neopixel"
@@ -265,21 +335,12 @@ namespace pixel {
         return strip;
     }
 
-    /**
-     * Converts red, green, blue channels into a RGB color
-     * @param red value of the red channel between 0 and 255. eg: 255
-     * @param green value of the green channel between 0 and 255. eg: 255
-     * @param blue value of the blue channel between 0 and 255. eg: 255
-     */
     //% weight=1
     //% blockId="neopixel_rgb" block="red %red|green %green|blue %blue"
     export function rgb(red: number, green: number, blue: number): number {
         return packRGB(red, green, blue);
     }
 
-    /**
-     * Gets the RGB value of a known color
-    */
     //% weight=2 blockGap=8
     //% blockId="neopixel_colors" block="%color"
     export function colors(color: NeoPixelColors): number {
@@ -302,17 +363,5 @@ namespace pixel {
         return b;
     }
 
-    /**
-     * Draws an image on the LED screen.
-     * @param leds the pattern of LED to turn on/off
-     * @param interval time in milliseconds to pause after drawing
-     */
-    //% help=basic/show-leds
-    //% weight=95 blockGap=8
-    //% imageLiteral=1 async
-    //% blockId=device_show_leds
-    //% block="show leds" icon="\uf00a"
-    //% parts="ledmatrix" interval.defl=400 shim=basic::lleds
-    declare function lleds(leds: string, interval?: number): void;
 
 }
