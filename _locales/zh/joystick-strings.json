@@ -1,7 +1,7 @@
 {
 	"Z_Pin.Z|block": "Z",
-	"XY_Pin.P1|block": "X",
-	"XY_Pin.P2|block": "Y",
+	"XY_Pin.X|block": "X",
+	"XY_Pin.Y|block": "Y",
   "joystick.read.value_x|block": "X",
   "joystick.read.value_y|block": "Y",
 	"joystick.joystickEvent.Down|block": "按下",

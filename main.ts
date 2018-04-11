@@ -1,6 +1,3 @@
-
-
-
 /**
  * User Buttons for DFRobot joystick.
  */
@@ -11,10 +8,10 @@ enum Z_Pin {
 }
 
 enum XY_Pin { 
-    //% blockId="P1" block="X"
-    P1 = <number>DAL.MICROBIT_ID_IO_P1,
-    //% blockId="P2" block="Y"
-    P2 = <number>DAL.MICROBIT_ID_IO_P2
+    //% blockId="X" block="X"
+    X = <number>DAL.MICROBIT_ID_IO_P1,
+    //% blockId="Y" block="Y"
+    Y = <number>DAL.MICROBIT_ID_IO_P2
 }
 
 //% weight=10 color=#DF6721 icon="\uf11b" block="joystick"
@@ -126,10 +123,10 @@ namespace joystick {
             PinInit();
         }
         let temp=0;
-        if (read_ == XY_Pin.P1) {
+        if (read_ == XY_Pin.X) {
             temp = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
         }
-        else if (read_ == XY_Pin.P2) { 
+        else if (read_ == XY_Pin.Y) { 
             temp = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
         }
         if (compare_ == 1) { 
@@ -153,10 +150,10 @@ namespace joystick {
     //% blockId=getXY block="get joystick on |%pin|" 
     export function getXY(pin: XY_Pin): number { 
         let val=0;
-        if (pin == XY_Pin.P1) {
+        if (pin == XY_Pin.X) {
             val = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
         }
-        else if (pin == XY_Pin.P2) { 
+        else if (pin == XY_Pin.Y) { 
             val = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
         }
         return val;
@@ -179,10 +176,10 @@ namespace joystick {
                 PinInit();
             }
             const packet = new Packet();
-            if (pin == XY_Pin.P1) {
+            if (pin == XY_Pin.X) {
                 packet.amplitude = (pins.analogReadPin(AnalogPin.P1) - 512) / 50;
             }
-            else if (pin == XY_Pin.P2) { 
+            else if (pin == XY_Pin.Y) { 
                 packet.amplitude = (pins.analogReadPin(AnalogPin.P2) - 512) / 50;
             }
             if (packet.amplitude == 0) { 
