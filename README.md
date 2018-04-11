@@ -39,7 +39,7 @@ which is an ideal tool for programming from entry and even to advanced programmi
 
 ## License
 
-MIT
+GNU
 ## Supported targets
 
 * for PXT/microbit

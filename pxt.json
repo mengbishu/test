@@ -2,15 +2,15 @@
     "name": "joystick",
     "version": "0.0.0",
     "description": "This library is DFRobot joystick provides the game handle control function.",
-    "license": "MIT",
+    "license": "GNU",
     "dependencies": {
         "core": "*",
-        "radio": "*",
-        "ws2812b": "github:Microsoft/pxt-ws2812b#v0.0.4"
+        "radio": "*"
     },
     "files": [
         "README.md",
         "main.ts",
+        "joystick.cpp",
         "_locales/zh/joystick-strings.json"
     ],
     "testFiles": [
