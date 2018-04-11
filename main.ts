@@ -10,7 +10,7 @@ enum Z_Pin {
     P8 = <number>DAL.MICROBIT_ID_IO_P8,
 }
 
-enum XY_Pin { 
+export enum XY_Pin { 
     //% blockId="P1" block="X"
     X = <number>DAL.MICROBIT_ID_IO_P1,
     //% blockId="P2" block="Y"
