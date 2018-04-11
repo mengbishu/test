@@ -1,7 +1,7 @@
 {
 	"Z_Pin.Z|block": "Z",
-	"XY_Pin.X|block": "X",
-	"XY_Pin.Y|block": "Y",
+	"XY_Pin.P1|block": "X",
+	"XY_Pin.P2|block": "Y",
   "joystick.read.value_x|block": "X",
   "joystick.read.value_y|block": "Y",
 	"joystick.joystickEvent.Down|block": "按下",
@@ -15,7 +15,7 @@
   "joystick.ZState|block": "摇杆Z |%event|",
 	"joystick.vibratorMotor|block": "振动电机 |%index|",
 	"joystick.vibratorMotorSpeed|block": "振动电机 强度|%degree|", 
-  "joystick.getXY|block": "摇杆|%pin|的值",
+  "joystick.joystick_compare|block": "摇杆|%read_|%compare_|%value_",
   "joystick.action|block": "摇杆| %pin | 幅度",
 	"joystick.led|block": "LED|%index|"
 }
