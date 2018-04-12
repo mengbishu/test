@@ -229,7 +229,7 @@ namespace pixel {
 
         //% blockId="showDir" block="%strip/ show dir %dir| color %color"
         showDir(dir: Direction,color:NeoPixelColors): void{
-        /*    let i=0;
+            let i=0;
             let j=0;
             let index=0;            
             index = dir*8; 
@@ -240,8 +240,6 @@ namespace pixel {
                     }
                 }
             }
-        */
-            this.show();     
         }
 
 
