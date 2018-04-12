@@ -136,8 +136,8 @@ namespace pixel {
         0x00, 0x00, 0xE7, 0x66, 0x3C, 0x18, 0x10, 0xE0,
         0x00, 0x00, 0x7E, 0x44, 0x18, 0x32, 0x7E, 0x00];
     
-    let queue: number[] = [0];
-    let screen: number[] = [0];
+  //  let queue: number[] = [0];
+  //  let screen: number[] = [0];
     
     export class Strip {
         buf: Buffer;
@@ -157,7 +157,7 @@ namespace pixel {
         }
 
         display(color: number): void{
-            let i = 0;
+        /*    let i = 0;
             let j = 0;
             let k = 0;
             for(k = 0;k < 8; k++){
@@ -167,11 +167,12 @@ namespace pixel {
                     }
                 }
             }
-            
+            */
+            this.show();
         }
 
         setChar(color: number): void { 
-            let i = 0;
+        /*    let i = 0;
             let j = 0;
             let k = 7;
             
@@ -187,9 +188,10 @@ namespace pixel {
                         screen[i] = (queue(i) << 1) | (queue(k / 8) >> 7 - 1);
                     }
                     this.display(color);
-				}
+              }
             }
-            
+            */
+            this.show();
         }
 
         //% blockId="showPixel" block="%strip| display pixel %x| %y| color %color"
@@ -212,30 +214,30 @@ namespace pixel {
 
         //% blockId="showString" block="%strip| display string %str| color %color"
         showString(str: string, color: NeoPixelColors): void{
-            let l = str.length;
-			this.len = l*8;
+    /*        let l = str.length;
+            this.len = l*8;
             let i = 0;
-			let index=0;
-			let j = 0;
-			let k = 0;
-			let sub = 0;
+            let index=0;
+            let j = 0;
+            let k = 0;
+            let sub = 0;
             for (i = 0; i < l; i++){
-				for (j = 0; j < 62; j++) { 
-					if (str[i] == chrs[j]) { 
-						index = j;
-						break;
-					}
-				}
+                for (j = 0; j < 62; j++) { 
+                    if (str[i] == chrs[j]) { 
+                        index = j;
+                        break;
+                    }
+                }
                 for (k = 0; k < 8; k++) {
                     queue[sub++] = chr[index * 8 + k];
                 }
             }
-            this.setChar(color);
+    */        this.setChar(color);
         }
 
         //% blockId="showDir" block="%strip/ show dir %dir| color %color"
         showDir(dir: Direction,color:NeoPixelColors): void{
-            let i=0;
+        /*    let i=0;
             let j=0;
             let index=0;            
             index = dir*8; 
@@ -246,6 +248,7 @@ namespace pixel {
                     }
                 }
             }
+        */
         }
 
         //% blockId="neopixel_set_strip_color" block="%strip|show color %rgb=neopixel_colors" 
