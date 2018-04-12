@@ -1,6 +1,3 @@
-/**
- * Well known colors for a NeoPixel strip
- */
 enum NeoPixelColors {
     //% block=red
     Red = 0xFF0000,
@@ -163,7 +160,7 @@ namespace pixel {
             for(k = 0;k < 8; k++){
                 for(i = 0;i < 8; i++){
                     if (((screen[k] >> i) & 0x1) == 1) {
-                        this.setPixel(7-i , k, color);
+                        this.setPixel(k , 7 - i, color);
                     }
                 }
             }
@@ -180,17 +177,14 @@ namespace pixel {
             this.display(color);
             basic.pause(100);
 
-            if (this.len > 8) {
-                this.clear();
-                while (k < this.len) {
-                    k++;
+/*            if (this.len > 8) {
+                while(k++ < this.len){
                     for (i = 0; i < 8; i++) {
-                        //screen[i] = (screen(i) << 1)|(queue[k/8]&(0x1<<7-i)>>(7-i));
-                        i++;
+                        screen[i] = (screen(i) << 1);
                     }
                     this.display(color);
                 }
-            }
+            }*/
         }
 
         //% blockId="showPixel" block="%strip| display pixel %x| %y| color %color"
