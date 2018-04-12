@@ -24,11 +24,6 @@ enum NeoPixelColors {
     Black = 0x000000
 }
 
-enum moveDir { 
-    right = 1,
-    left = -1
-}
-
 /**
  * Different modes for RGB or RGB+W NeoPixel strips
  */
@@ -147,7 +142,6 @@ namespace pixel {
         _length: number; // number of LEDs
         _mode: NeoPixelMode;
         _matrixWidth: number; // number of leds in a matrix - if any
-        flag: number = 0;
 
         setPixel(x: number, y: number, color: number): void { 
             let offset = y*8+x
@@ -195,9 +189,6 @@ namespace pixel {
         //% blockId="showString" block="%strip| display string %str| color %color"
         showString(str: string, color: NeoPixelColors): void{
             let len = str.length;
-            if (len > 1) {
-                this.flag = 1;
-            }
             let i = 0;
             for (i = 0; i < len; i++){
                 this.setChar(str[i], color);
@@ -219,6 +210,7 @@ namespace pixel {
             }
         }
 
+
         //% blockId="neopixel_set_strip_color" block="%strip|show color %rgb=neopixel_colors" 
         //% weight=85 blockGap=8
         //% parts="neopixel"
@@ -235,16 +227,9 @@ namespace pixel {
             this.setPixelRGB(pixeloffset, rgb);
         }
 
-        move(dir: moveDir) {
-            let i = 0;
-            let j = 0;
-            for (i = 0; i < 8; i++){
-                for (j = 0; j < 8; j++){
-                    
-                }
-            }
-        }
-
+        //% blockId="neopixel_show" block="%strip|show" blockGap=8
+        //% weight=79
+        //% parts="neopixel"
         show() {
             ws2812b.sendBuffer(this.buf, this.pin);
         }
@@ -316,7 +301,21 @@ namespace pixel {
                 this.setBufferRGB(i * stride, red, green, blue)
             }
         }
+        private setAllW(white: number) {
+            if (this._mode !== NeoPixelMode.RGBW)
+                return;
 
+            let br = this.brightness;
+            if (br < 255) {
+                white = (white * br) >> 8;
+            }
+            let buf = this.buf;
+            let end = this.start + this._length;
+            for (let i = this.start; i < end; ++i) {
+                let ledoffset = i * 4;
+                buf[ledoffset + 3] = white;
+            }
+        }
         private setPixelRGB(pixeloffset: number, rgb: number): void {
             if (pixeloffset < 0
                 || pixeloffset >= this._length)
@@ -336,6 +335,23 @@ namespace pixel {
                 blue = (blue * br) >> 8;
             }
             this.setBufferRGB(pixeloffset, red, green, blue)
+        }
+        private setPixelW(pixeloffset: number, white: number): void {
+            if (this._mode !== NeoPixelMode.RGBW)
+                return;
+
+            if (pixeloffset < 0
+                || pixeloffset >= this._length)
+                return;
+
+            pixeloffset = (pixeloffset + this.start) * 4;
+
+            let br = this.brightness;
+            if (br < 255) {
+                white = (white * br) >> 8;
+            }
+            let buf = this.buf;
+            buf[pixeloffset + 3] = white;
         }
     }
 
@@ -383,4 +399,6 @@ namespace pixel {
         let b = (rgb) & 0xFF;
         return b;
     }
+
+
 }
