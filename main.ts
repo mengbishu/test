@@ -21,10 +21,6 @@ enum NeoPixelColors {
     Black = 0x000000
 }
 
-enum MoveDir { 
-    right = 1,
-    left = -1
-}
 
 /**
  * Different modes for RGB or RGB+W NeoPixel strips
