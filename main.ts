@@ -163,7 +163,7 @@ namespace pixel {
             for(k = 0;k < 8; k++){
                 for(i = 0;i < 8; i++){
                     if (((screen[k] >> i) & 0x1) == 1) {
-                        this.setPixel(k , 7 - i, color);
+                        this.setPixel(7-i , k, color);
                     }
                 }
             }
@@ -180,14 +180,17 @@ namespace pixel {
             this.display(color);
             basic.pause(100);
 
-/*            if (this.len > 8) {
-                while(k++ < this.len){
+            if (this.len > 8) {
+                this.clear();
+                while (k < this.len) {
+                    k++;
                     for (i = 0; i < 8; i++) {
-                        screen[i] = (screen(i) << 1);
+                        //screen[i] = (screen(i) << 1)|(queue[k/8]&(0x1<<7-i)>>(7-i));
+                        i++;
                     }
                     this.display(color);
                 }
-            }*/
+            }
         }
 
         //% blockId="showPixel" block="%strip| display pixel %x| %y| color %color"
