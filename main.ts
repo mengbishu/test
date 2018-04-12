@@ -144,30 +144,50 @@ namespace pixel {
         _length: number; // number of LEDs
         _mode: NeoPixelMode;
         _matrixWidth: number; // number of leds in a matrix - if any
+        len: number = 0;
 
         setPixel(x: number, y: number, color: number): void { 
             let offset = y*8+x
             this.setPixelColor(offset, color)
             this.show()
-        }        
+        }
 
-        setChar(ch: string, color: number): void { 
-            let i=0;
-            let j=0;
-            let index=0;
-            for (i = 0; i < 62; i++) { 
-                if (ch == chrs[i]) { 
-                    index = i;
-                }
-            }
-            index *= 8; 
-            for (i = 0; i < 8; i++) {
-                for (j = 0; j < 8; j++) {
-                    if (((chr[index+i] >> j) & 0x1) == 1) {
-                        this.setPixel(j, 7-i, color)
+        display(color: number): void{
+        /*    let i = 0;
+            let j = 0;
+            let k = 0;
+            for(k = 0;k < 8; k++){
+                for(i = 0;i < 8; i++){
+                    if (((screen[k] >> i) & 0x1) == 1) {
+                        this.setPixel(k * 8, 7 - i, color);
                     }
                 }
             }
+            */
+            this.show();
+        }
+
+        setChar(color: number): void { 
+        /*    let i = 0;
+            let j = 0;
+            let k = 7;
+            
+            for (i = 0; i < 8; i++){
+                screen[i] = queue[i];
+            }
+            this.display(color);
+            basic.pause(100);
+
+            if (this.len > 8) {
+                while(k++ < this.len){
+                    for (i = 0; i < 8; i++) {
+                        screen[i] = (queue(i) << 1) | (queue(k / 8) >> 7 - 1);
+                    }
+                    this.display(color);
+              }
+            }
+            */
+            this.show();
         }
 
         //% blockId="showPixel" block="%strip| display pixel %x| %y| color %color"
@@ -190,16 +210,30 @@ namespace pixel {
 
         //% blockId="showString" block="%strip| display string %str| color %color"
         showString(str: string, color: NeoPixelColors): void{
-            let len = str.length;
+    /*        let l = str.length;
+            this.len = l*8;
             let i = 0;
-            for (i = 0; i < len; i++){
-                this.setChar(str[i], color);
+            let index=0;
+            let j = 0;
+            let k = 0;
+            let sub = 0;
+            for (i = 0; i < l; i++){
+                for (j = 0; j < 62; j++) { 
+                    if (str[i] == chrs[j]) { 
+                        index = j;
+                        break;
+                    }
+                }
+                for (k = 0; k < 8; k++) {
+                    queue[sub++] = chr[index * 8 + k];
+                }
             }
+    */        this.setChar(color);
         }
 
         //% blockId="showDir" block="%strip/ show dir %dir| color %color"
         showDir(dir: Direction,color:NeoPixelColors): void{
-            let i=0;
+        /*    let i=0;
             let j=0;
             let index=0;            
             index = dir*8; 
@@ -210,6 +244,8 @@ namespace pixel {
                     }
                 }
             }
+        */
+            this.show();     
         }
 
 
@@ -242,6 +278,7 @@ namespace pixel {
         clear(): void {
             const stride = this._mode === NeoPixelMode.RGBW ? 4 : 3;
             this.buf.fill(0, this.start * stride, this._length * stride);
+            this.show();
         }
 
         //% blockId="neopixel_set_brightness" block="%strip|set brightness %brightness" blockGap=8
