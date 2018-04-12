@@ -144,7 +144,7 @@ namespace pixel {
         _length: number; // number of LEDs
         _mode: NeoPixelMode;
         _matrixWidth: number; // number of leds in a matrix - if any
-        len: number = 0;
+        len: number;
 
         setPixel(x: number, y: number, color: number): void { 
             let offset = y*8+x
