@@ -24,6 +24,11 @@ enum NeoPixelColors {
     Black = 0x000000
 }
 
+enum moveDir { 
+    right = 1,
+    left = -1
+}
+
 /**
  * Different modes for RGB or RGB+W NeoPixel strips
  */
@@ -36,6 +41,19 @@ enum NeoPixelMode {
     RGB_RGB = 2
 }
 
+enum Direction{
+    east = 0,
+    southeast = 1,
+    south = 2,
+    southwest = 3,
+    west = 4,
+    northwest  = 5,
+    north = 6,
+    northeast = 7
+    }
+    
+
+
 /**
  * Functions to operate NeoPixel strips.
  */
@@ -45,7 +63,82 @@ namespace pixel {
      * A NeoPixel strip
      */
     let chrs: string[] = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-
+    
+    let dirs: number[] = [0x00, 0x00, 0x04, 0x7E, 0x04, 0x00, 0x00, 0x00,
+        0x00, 0x40, 0x20, 0x10, 0x0A, 0x06, 0x0E, 0x00,
+        0x00, 0x10, 0x10, 0x10, 0x10, 0x38, 0x10, 0x00,
+        0x00, 0x02, 0x04, 0x08, 0x50, 0x60, 0x70, 0x00,
+        0x00, 0x00, 0x20, 0x7E, 0x20, 0x00, 0x00, 0x00,
+        0x00, 0x70, 0x60, 0x50, 0x08, 0x04, 0x02, 0x00,
+        0x00, 0x10, 0x38, 0x10, 0x10, 0x10, 0x10, 0x00,
+        0x00, 0x0E, 0x06, 0x0A, 0x10, 0x20, 0x40, 0x00];
+    
+    let chr: number[] = [0x3C, 0x66, 0x42, 0x42, 0x42, 0x66, 0x3C, 0x00,
+        0x10, 0x70, 0x10, 0x10, 0x10, 0x10, 0x7C, 0x00,
+        0x3C, 0x42, 0x02, 0x04, 0x18, 0x22, 0x7E, 0x00,
+        0x3C, 0x42, 0x02, 0x1C, 0x02, 0x42, 0x3C, 0x00,
+        0x0C, 0x14, 0x24, 0x44, 0x7E, 0x04, 0x0C, 0x00,
+        0x7E, 0x40, 0x7C, 0x02, 0x02, 0x42, 0x3C, 0x00,
+        0x3C, 0x20, 0x40, 0x7C, 0x42, 0x42, 0x3C, 0x00,
+        0x7E, 0x44, 0x08, 0x10, 0x10, 0x10, 0x10, 0x00,
+        0x3C, 0x42, 0x42, 0x3C, 0x42, 0x42, 0x3C, 0x00,
+        0x38, 0x46, 0x42, 0x3E, 0x02, 0x04, 0x3C, 0x00,
+        0x10, 0x18, 0x28, 0x24, 0x7C, 0x42, 0xE7, 0x00,
+        0xFC, 0x44, 0x78, 0x46, 0x42, 0x42, 0xFC, 0x00,
+        0x3E, 0x42, 0x80, 0x80, 0x80, 0x42, 0x3C, 0x00,
+        0xF8, 0x46, 0x42, 0x42, 0x42, 0x44, 0xF8, 0x00,
+        0xFC, 0x42, 0x40, 0x78, 0x40, 0x46, 0xFC, 0x00,
+        0xFC, 0x42, 0x48, 0x78, 0x48, 0x40, 0xE0, 0x00,
+        0x3C, 0xC4, 0x80, 0x80, 0x8E, 0x44, 0x78, 0x00,
+        0xE7, 0x42, 0x42, 0x7E, 0x42, 0x42, 0xE7, 0x00,
+        0x7C, 0x10, 0x10, 0x10, 0x10, 0x10, 0x7C, 0x00,
+        0x3E, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0xF0,
+        0xFE, 0x48, 0x70, 0x70, 0x48, 0x44, 0xEE, 0x00,
+        0xE0, 0x40, 0x40, 0x40, 0x40, 0x42, 0xFE, 0x00,
+        0xEE, 0x6C, 0x6C, 0x54, 0x54, 0x54, 0xC6, 0x00,
+        0xC7, 0x62, 0x52, 0x4A, 0x4A, 0x46, 0xE2, 0x00,
+        0x3C, 0x46, 0x82, 0x82, 0x82, 0x44, 0x38, 0x00,
+        0xFC, 0x42, 0x42, 0x7C, 0x40, 0x40, 0xE0, 0x00,
+        0x78, 0xC6, 0x82, 0x82, 0xB2, 0xCE, 0x38, 0x06,
+        0xFE, 0x42, 0x7C, 0x48, 0x44, 0x46, 0xE3, 0x00,
+        0x3E, 0x42, 0x60, 0x18, 0x06, 0x42, 0x7C, 0x00,
+        0xFE, 0x92, 0x10, 0x10, 0x10, 0x10, 0x38, 0x00,
+        0xE7, 0x42, 0x42, 0x42, 0x42, 0x42, 0x3C, 0x00,
+        0xE7, 0x42, 0x64, 0x24, 0x28, 0x18, 0x10, 0x00,
+        0xD6, 0x92, 0x92, 0xAA, 0xAE, 0x44, 0x44, 0x00,
+        0xE7, 0x66, 0x24, 0x18, 0x34, 0x26, 0xE7, 0x00,
+        0xEE, 0x44, 0x28, 0x10, 0x10, 0x10, 0x38, 0x00,
+        0x7E, 0x84, 0x08, 0x10, 0x20, 0x42, 0xFC, 0x00,
+        0x00, 0x00, 0x3C, 0x42, 0x3E, 0x42, 0x3F, 0x00,
+        0xC0, 0x40, 0x5C, 0x62, 0x42, 0x42, 0x7C, 0x00,
+        0x00, 0x00, 0x3C, 0x62, 0x40, 0x42, 0x3C, 0x00,
+        0x06, 0x02, 0x1E, 0x62, 0x42, 0x42, 0x3F, 0x00,
+        0x00, 0x00, 0x3C, 0x42, 0x7E, 0x40, 0x3E, 0x00,
+        0x0F, 0x10, 0x7E, 0x10, 0x10, 0x10, 0x7C, 0x00,
+        0x00, 0x00, 0x3E, 0x44, 0x38, 0x60, 0x5E, 0x7E,
+        0xC0, 0x40, 0x5C, 0x62, 0x42, 0x42, 0xE7, 0x00,
+        0x30, 0x00, 0x70, 0x10, 0x10, 0x10, 0x7C, 0x00,
+        0x0C, 0x00, 0x1C, 0x04, 0x04, 0x04, 0x04, 0x78,
+        0xC0, 0x40, 0x4E, 0x58, 0x70, 0x48, 0xEE, 0x00,
+        0x70, 0x10, 0x10, 0x10, 0x10, 0x10, 0x7C, 0x00,
+        0x00, 0x00, 0xFF, 0x49, 0x49, 0x49, 0xED, 0x00,
+        0x00, 0x00, 0xD8, 0x66, 0x42, 0x42, 0xE7, 0x00,
+        0x00, 0x00, 0x3C, 0x42, 0x42, 0x42, 0x3C, 0x00,
+        0x00, 0x00, 0xF8, 0x46, 0x42, 0x42, 0x7C, 0xE0,
+        0x00, 0x00, 0x3E, 0x42, 0x42, 0x42, 0x3E, 0x07,
+        0x00, 0x00, 0xEE, 0x30, 0x20, 0x20, 0xF8, 0x00,
+        0x00, 0x00, 0x3E, 0x40, 0x3C, 0x42, 0x7C, 0x00,
+        0x10, 0x10, 0x7C, 0x10, 0x10, 0x10, 0x0C, 0x00,
+        0x00, 0x00, 0xC6, 0x42, 0x42, 0x42, 0x3F, 0x00,
+        0x00, 0x00, 0xE7, 0x46, 0x24, 0x28, 0x10, 0x00,
+        0x00, 0x00, 0xD7, 0x92, 0xAA, 0x6A, 0x44, 0x00,
+        0x00, 0x00, 0x6E, 0x3C, 0x18, 0x3C, 0x76, 0x00,
+        0x00, 0x00, 0xE7, 0x66, 0x3C, 0x18, 0x10, 0xE0,
+        0x00, 0x00, 0x7E, 0x44, 0x18, 0x32, 0x7E, 0x00];
+    
+    let queue: number[] = [0];
+    let screen: number[] = [0];
+    
     export class Strip {
         buf: Buffer;
         pin: DigitalPin;
@@ -55,54 +148,105 @@ namespace pixel {
         _length: number; // number of LEDs
         _mode: NeoPixelMode;
         _matrixWidth: number; // number of leds in a matrix - if any
+        len: number = 0;
 
         setPixel(x: number, y: number, color: number): void { 
             let offset = y*8+x
-            this.setPixelColor(offset,color)
-        }        
-
-        setChar(ch: string, color: number): void { 
-            let i=0;
-            let j=0;
-            let index=0;
-            for (i = 0; i < 62; i++) { 
-                if (ch == chrs[i]) { 
-                    index = i;
-                }
-            }
-            index *= 8; 
-            for (i = 0; i < 8; i++) {
-                for (j = 0; j < 8; j++) {
-                   // if (((chr[index+i] >> j) & 0x1) == 1) {
-                        this.setPixel(j, 7-i, color)
-                   // }
-                }
-            }
+            this.setPixelColor(offset, color)
+            this.show()
         }
 
-        //% blockId="showPixel" block="display pixel %x %y color %color"
+        display(color: number): void{
+            let i = 0;
+            let j = 0;
+            let k = 0;
+            for(k = 0;k < 8; k++){
+                for(i = 0;i < 8; i++){
+                    if (((screen[k] >> i) & 0x1) == 1) {
+                        this.setPixel(k * 8, 7 - i, color);
+                    }
+                }
+            }
+            
+        }
+
+        setChar(color: number): void { 
+            let i = 0;
+            let j = 0;
+            let k = 7;
+            
+            for (i = 0; i < 8; i++){
+                screen[i] = queue[i];
+            }
+            this.display(color);
+            basic.pause(100);
+
+            if (this.len > 8) {
+                while(k++ < this.len){
+                    for (i = 0; i < 8; i++) {
+                        screen[i] = (queue(i) << 1) | (queue(k / 8) >> 7 - 1);
+                    }
+                    this.display(color);
+				}
+            }
+            
+        }
+
+        //% blockId="showPixel" block="%strip| display pixel %x| %y| color %color"
         //% x.min=0 x.max=8
         //% y.min=0 y.max=8
-        showPixel(x: number, y: number, color: NeoPixelColors): void{
+        showPixel(x: number, y: number, color: number): void{
             this.setPixel(x, y, color);
         }
+        
+        //% blockId="clearPixel" block="%strip| clear pixel %x| %y"
+        clearPixel(x: number, y: number): void{
+            this.setPixel(x, y, NeoPixelColors.Black);
+        }
 
-        //% blockId="showNumber" block="show number %num color %color"
+        //% blockId="showNumber" block="%strip| show number %num| color %color"
         //% parts="neopixel"
         showNumber(num:number,color:NeoPixelColors): void { 
             this.showString(num.toString(),color)
         }
 
-        //% blockId="showString" block="display string %str color %color"
+        //% blockId="showString" block="%strip| display string %str| color %color"
         showString(str: string, color: NeoPixelColors): void{
-            let len = str.length;
+            let l = str.length;
+			this.len = l*8;
             let i = 0;
-            for (i = 0; i < len; i++){
-                this.setChar(str[i], color);
+			let index=0;
+			let j = 0;
+			let k = 0;
+			let sub = 0;
+            for (i = 0; i < l; i++){
+				for (j = 0; j < 62; j++) { 
+					if (str[i] == chrs[j]) { 
+						index = j;
+						break;
+					}
+				}
+                for (k = 0; k < 8; k++) {
+                    queue[sub++] = chr[index * 8 + k];
+                }
+            }
+            this.setChar(color);
+        }
+
+        //% blockId="showDir" block="%strip/ show dir %dir| color %color"
+        showDir(dir: Direction,color:NeoPixelColors): void{
+            let i=0;
+            let j=0;
+            let index=0;            
+            index = dir*8; 
+            for (i = 0; i < 8; i++) {
+                for (j = 0; j < 8; j++) {
+                    if (((dirs[index+i] >> j) & 0x1) == 1) {
+                        this.setPixel(j, 7-i, color)
+                    }
+                }
             }
         }
-        
-
 
         //% blockId="neopixel_set_strip_color" block="%strip|show color %rgb=neopixel_colors" 
         //% weight=85 blockGap=8
@@ -120,9 +264,6 @@ namespace pixel {
             this.setPixelRGB(pixeloffset, rgb);
         }
 
-        //% blockId="neopixel_show" block="%strip|show" blockGap=8
-        //% weight=79
-        //% parts="neopixel"
         show() {
             ws2812b.sendBuffer(this.buf, this.pin);
         }
@@ -133,12 +274,7 @@ namespace pixel {
         clear(): void {
             const stride = this._mode === NeoPixelMode.RGBW ? 4 : 3;
             this.buf.fill(0, this.start * stride, this._length * stride);
-        }
-
-        //% blockId="neopixel_length" block="%strip|length" blockGap=8
-        //% weight=60 
-        length() {
-            return this._length;
+            this.show();
         }
 
         //% blockId="neopixel_set_brightness" block="%strip|set brightness %brightness" blockGap=8
@@ -147,8 +283,6 @@ namespace pixel {
         setBrightness(brightness: number): void {
             this.brightness = brightness & 0xff;
         }
-
-
 
         //% blockId="neopixel_shift" block="%strip|shift pixels by %offset" blockGap=8
         //% weight=40
@@ -202,21 +336,7 @@ namespace pixel {
                 this.setBufferRGB(i * stride, red, green, blue)
             }
         }
-        private setAllW(white: number) {
-            if (this._mode !== NeoPixelMode.RGBW)
-                return;
 
-            let br = this.brightness;
-            if (br < 255) {
-                white = (white * br) >> 8;
-            }
-            let buf = this.buf;
-            let end = this.start + this._length;
-            for (let i = this.start; i < end; ++i) {
-                let ledoffset = i * 4;
-                buf[ledoffset + 3] = white;
-            }
-        }
         private setPixelRGB(pixeloffset: number, rgb: number): void {
             if (pixeloffset < 0
                 || pixeloffset >= this._length)
@@ -236,23 +356,6 @@ namespace pixel {
                 blue = (blue * br) >> 8;
             }
             this.setBufferRGB(pixeloffset, red, green, blue)
-        }
-        private setPixelW(pixeloffset: number, white: number): void {
-            if (this._mode !== NeoPixelMode.RGBW)
-                return;
-
-            if (pixeloffset < 0
-                || pixeloffset >= this._length)
-                return;
-
-            pixeloffset = (pixeloffset + this.start) * 4;
-
-            let br = this.brightness;
-            if (br < 255) {
-                white = (white * br) >> 8;
-            }
-            let buf = this.buf;
-            buf[pixeloffset + 3] = white;
         }
     }
 
@@ -300,6 +403,4 @@ namespace pixel {
         let b = (rgb) & 0xFF;
         return b;
     }
-
-
 }
