@@ -206,6 +206,11 @@ namespace pixel {
 
         //% blockId="showString" block="%strip| display string %str| color %color"
         showString(str: string, color: NeoPixelColors): void{
+            let len = str.length;
+            let i = 0;
+            for (i = 0; i < len; i++){
+                this.setChar(str[i], color);
+            }
     /*        let l = str.length;
             this.len = l*8;
             let i = 0;
@@ -224,7 +229,7 @@ namespace pixel {
                     queue[sub++] = chr[index * 8 + k];
                 }
             }
-    */        this.setChar('a',color);
+    */
         }
 
         //% blockId="showDir" block="%strip/ show dir %dir| color %color"
@@ -236,7 +241,7 @@ namespace pixel {
             for (i = 0; i < 8; i++) {
                 for (j = 0; j < 8; j++) {
                     if (((dirs[index+i] >> j) & 0x1) == 1) {
-                        this.setPixel(j, 7-i, color)
+                        this.setPixel(j, 7-i, color);
                     }
                 }
             }
