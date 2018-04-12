@@ -167,27 +167,23 @@ namespace pixel {
             this.show();
         }
 
-        setChar(color: number): void { 
-        /*    let i = 0;
-            let j = 0;
-            let k = 7;
-            
-            for (i = 0; i < 8; i++){
-                screen[i] = queue[i];
+        setChar(ch: string,color: number): void { 
+            let i=0;
+            let j=0;
+            let index=0;
+            for (i = 0; i < 62; i++) { 
+                if (ch == chrs[i]) { 
+                    index = i;
+                }
             }
-            this.display(color);
-            basic.pause(100);
-
-            if (this.len > 8) {
-                while(k++ < this.len){
-                    for (i = 0; i < 8; i++) {
-                        screen[i] = (queue(i) << 1) | (queue(k / 8) >> 7 - 1);
+            index *= 8; 
+            for (i = 0; i < 8; i++) {
+                for (j = 0; j < 8; j++) {
+                    if (((chr[index+i] >> j) & 0x1) == 1) {
+                        this.setPixel(j, 7-i, color)
                     }
-                    this.display(color);
-              }
+                }
             }
-            */
-            this.show();
         }
 
         //% blockId="showPixel" block="%strip| display pixel %x| %y| color %color"
@@ -228,7 +224,7 @@ namespace pixel {
                     queue[sub++] = chr[index * 8 + k];
                 }
             }
-    */        this.setChar(color);
+    */        this.setChar('a',color);
         }
 
         //% blockId="showDir" block="%strip/ show dir %dir| color %color"
