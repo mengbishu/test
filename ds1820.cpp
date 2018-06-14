@@ -18,7 +18,7 @@
 using namespace pxt;
 
 namespace DS1820 {
-  class microbitp : public MicroBitComponent
+class microbitp : public MicroBitComponent
 {
   public:
     void *pin;
@@ -27,17 +27,17 @@ namespace DS1820 {
     PinCapability capability;
     uint8_t pullMode;
     PinName name;
-
+    
     microbitp(int id, PinName name, PinCapability capability){
         //set mandatory attributes
         this->id = id;
         this->name = name;
         this->capability = capability;
-        this->pullMode = MICROBIT_DEFAULT_PULLMODE;
+        this->pullMode = 1;
         this->status = 0x00;
         this->pin = NULL;
     }
-    
+
     void disconnect(){
         if (status & IO_STATUS_DIGITAL_IN)
             delete ((DigitalIn *)pin);
@@ -56,7 +56,7 @@ namespace DS1820 {
         this->pin = NULL;
         this->status = 0;
     }
-/*
+
     int setDigitalValue(int value){
         // Check if this pin has a digital mode...
         if(!(PIN_CAPABILITY_DIGITAL_OUT & capability))
@@ -98,7 +98,7 @@ namespace DS1820 {
 
         return ((DigitalIn *)pin)->read();
     }
-    */
+    
 };
   
     MicroBitPin WritePin = uBit.io.P2;
