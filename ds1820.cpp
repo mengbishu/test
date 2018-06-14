@@ -22,6 +22,8 @@ namespace DS1820 {
 {
   public:
     void *pin;
+    int id;
+    int status;
     PinCapability capability;
     uint8_t pullMode;
     PinName name;
