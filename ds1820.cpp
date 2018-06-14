@@ -78,7 +78,7 @@ class microbitp : public MicroBitComponent
 
         return MICROBIT_OK;
     }
-
+/*
     int getDigitalValue(){
         //check if this pin has a digital mode...
         if(!(PIN_CAPABILITY_DIGITAL_IN & capability))
@@ -98,7 +98,7 @@ class microbitp : public MicroBitComponent
 
         return ((DigitalIn *)pin)->read();
     }
-    
+    */
 };
   
     MicroBitPin WritePin = uBit.io.P2;
