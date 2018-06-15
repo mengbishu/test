@@ -63,7 +63,8 @@ class microbitp : public MicroBitComponent
 //    microbitp  pin0(7, 3, 15);
 //    microbitp  pin0(8, MICROBIT_PIN_P0, PIN_CAPABILITY_ALL);
 //    microbitp  pin2(9, 1, 15);
-
+*/
+MicroBitPin pin1 = uBit.io.P1;
     uint8_t init() {
         pin1.setDigitalValue(0);
         for (volatile uint16_t i = 0; i < 600; i++);
@@ -157,7 +158,7 @@ class microbitp : public MicroBitComponent
         };
         return byte;
     }
-*/
+
     //%
     int16_t Temperature() {
       /*
