@@ -65,9 +65,9 @@ class microbitp : public MicroBitComponent
 
         // Write the value.
         ((DigitalOut *)pin)->write(value);
-
+*/
         return 0;
-        */
+        
     }
 
     int getDigitalValue(){
