@@ -18,6 +18,7 @@
 using namespace pxt;
 
 namespace DS1820 {
+/*
 class microbitp : public MicroBitComponent
 {
   public:
@@ -67,7 +68,7 @@ class microbitp : public MicroBitComponent
         return ((DigitalIn *)pin)->read();
 //          return 0;
     }
-};
+};*/
     
 //    MicroBitPin pin1 = uBit.io.P1;
     MicroBit uBit;
@@ -172,6 +173,7 @@ class microbitp : public MicroBitComponent
 
     //%
     int16_t Temperature() {
+      /*
         init();
         writeByte(0xCC);
         convert();
@@ -183,6 +185,8 @@ class microbitp : public MicroBitComponent
 
         int16_t temp = (b2 << 8 | b1);
         return temp * 100 / 16;
+        */
+        return 1;
     }
  
 }
