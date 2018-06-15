@@ -36,7 +36,7 @@ class microbitp : public MicroBitComponent
         this->status = 0x00;
         this->pin = NULL;
     }
-
+/*
     void disconnect(){
         if (status & 0x01)
             delete ((DigitalIn *)pin);
@@ -45,7 +45,7 @@ class microbitp : public MicroBitComponent
         this->pin = NULL;
         this->status = 0;
     }
-/*
+
     int setDigitalValue(int value){
         // Move into a Digital input state if necessary.
         if (!(status & 0x02)){
@@ -61,7 +61,6 @@ class microbitp : public MicroBitComponent
     int getDigitalValue(){
         if (!(status & (0x01 | 0x20 | 0x40)))
         {
-
             ((DigitalIn *)pin)->mode(PullNone);
             status |= 0x01;
         }
