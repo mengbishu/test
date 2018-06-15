@@ -37,68 +37,44 @@ class microbitp : public MicroBitComponent
         this->pin = NULL;
     }
 
-    void disconnect(){/*
+    void disconnect(){
         if (status & 0x01)
             delete ((DigitalIn *)pin);
         if (status & 0x02)
             delete ((DigitalOut *)pin);
         this->pin = NULL;
-        this->status = 0;*/
+        this->status = 0;
     }
-
+/*
     int setDigitalValue(int value){
-      /*
-        // Check if this pin has a digital mode...
-        if(!(0x02 & capability))
-            return -1002;
-
-        // Ensure we have a valid value.
-        if (value < 0 || value > 1)
-            return -1001;
-
         // Move into a Digital input state if necessary.
         if (!(status & 0x02)){
             disconnect();
             pin = new DigitalOut(name);
             status |= 0x02;
         }
-
         // Write the value.
         ((DigitalOut *)pin)->write(value);
-*/
         return 0;
-        
     }
 
     int getDigitalValue(){
-      /*
-        //check if this pin has a digital mode...
-        if(!(0x01 & capability))
-            return -1002;
-
-        // Move into a Digital input state if necessary.
         if (!(status & (0x01 | 0x20 | 0x40)))
         {
-//            disconnect();
-//            pin = new DigitalIn(name, (PinMode)pullMode);
-        ((DigitalIn *)pin)->mode(PullNone);
+
+            ((DigitalIn *)pin)->mode(PullNone);
             status |= 0x01;
         }
-
-        if(status & (0x20 | 0x40))
-            return ((TimedInterruptIn *)pin)->read();
-
         return ((DigitalIn *)pin)->read();
-        */return 0;
     }
-    
+*/
 };
-
+    
 //    MicroBitPin pin1 = uBit.io.P1;
     MicroBit uBit;
     MicroBitPin pin1 = uBit.io.P2;
 //    microbitp  pin0(7, 3, 15);
-    microbitp  pin0(8, 2, 15);
+    microbitp  pin0(8, MICROBIT_PIN_P0, PIN_CAPABILITY_ALL);
 //    microbitp  pin2(9, 1, 15);
 
     uint8_t init() {
