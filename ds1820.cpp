@@ -17,14 +17,6 @@
 
 using namespace pxt;
 
-#define IO_STATUS_DIGITAL_IN                0x01        // Pin is configured as a digital input, with no pull up.
-#define IO_STATUS_DIGITAL_OUT               0x02        // Pin is configured as a digital output
-#define IO_STATUS_ANALOG_IN                 0x04        // Pin is Analog in
-#define IO_STATUS_ANALOG_OUT                0x08        // Pin is Analog out
-#define IO_STATUS_TOUCH_IN                  0x10        // Pin is a makey-makey style touch sensor
-#define IO_STATUS_EVENT_ON_EDGE             0x20        // Pin will generate events on pin change
-#define IO_STATUS_EVENT_PULSE_ON_EDGE       0x40        // Pin will generate events on pin change
-
 namespace DS1820 {
 class microbitp : public MicroBitComponent
 {
@@ -37,7 +29,6 @@ class microbitp : public MicroBitComponent
     PinName name;
     
     microbitp(int id, PinName name, PinCapability capability){
-        //set mandatory attributes
         this->id = id;
         this->name = name;
         this->capability = capability;
@@ -46,16 +37,17 @@ class microbitp : public MicroBitComponent
         this->pin = NULL;
     }
 
-    void disconnect(){
-        if (status & IO_STATUS_DIGITAL_IN)
+    void disconnect(){/*
+        if (status & 0x01)
             delete ((DigitalIn *)pin);
-        if (status & IO_STATUS_DIGITAL_OUT)
+        if (status & 0x02)
             delete ((DigitalOut *)pin);
         this->pin = NULL;
-        this->status = 0;
+        this->status = 0;*/
     }
 
     int setDigitalValue(int value){
+      /*
         // Check if this pin has a digital mode...
         if(!(0x02 & capability))
             return -1002;
@@ -65,64 +57,71 @@ class microbitp : public MicroBitComponent
             return -1001;
 
         // Move into a Digital input state if necessary.
-        if (!(status & IO_STATUS_DIGITAL_OUT)){
+        if (!(status & 0x02)){
             disconnect();
             pin = new DigitalOut(name);
-            status |= IO_STATUS_DIGITAL_OUT;
+            status |= 0x02;
         }
 
         // Write the value.
         ((DigitalOut *)pin)->write(value);
 
         return 0;
+        */
     }
-/*
+
     int getDigitalValue(){
+      /*
         //check if this pin has a digital mode...
         if(!(0x01 & capability))
             return -1002;
 
         // Move into a Digital input state if necessary.
-        if (!(status & (IO_STATUS_DIGITAL_IN | IO_STATUS_EVENT_ON_EDGE | IO_STATUS_EVENT_PULSE_ON_EDGE)))
+        if (!(status & (0x01 | 0x20 | 0x40)))
         {
 //            disconnect();
 //            pin = new DigitalIn(name, (PinMode)pullMode);
         ((DigitalIn *)pin)->mode(PullNone);
-            status |= IO_STATUS_DIGITAL_IN;
+            status |= 0x01;
         }
 
-        if(status & (IO_STATUS_EVENT_ON_EDGE | IO_STATUS_EVENT_PULSE_ON_EDGE))
+        if(status & (0x20 | 0x40))
             return ((TimedInterruptIn *)pin)->read();
 
         return ((DigitalIn *)pin)->read();
+        */return 0;
     }
-    */
+    
 };
-  
-    MicroBitPin WritePin = uBit.io.P2;
-    MicroBitPin ReadPin = uBit.io.P1;
+    MicroBitPin pin1 = uBit.io.P2;
+//    MicroBitPin pin1 = uBit.io.P1;
+    MicroBit uBit;
+
+//    microbitp  pin0(7, 3, 15);
+    microbitp  pin0(8, 2, 15);
+//    microbitp  pin2(9, 1, 15);
 
     uint8_t init() {
-        WritePin.setDigitalValue(0);
+        pin1.setDigitalValue(0);
         for (volatile uint16_t i = 0; i < 600; i++);
-        WritePin.setDigitalValue(1);
+        pin1.setDigitalValue(1);
         for (volatile uint8_t i = 0; i < 30; i++);
-        int b = ReadPin.getDigitalValue();
+        int b = pin1.getDigitalValue();
         for (volatile uint16_t i = 0; i < 600; i++);
         return b;
     }
 
     void sendZero() {
-        WritePin.setDigitalValue(0);
+        pin1.setDigitalValue(0);
         for (volatile uint8_t i = 1; i < 75; i++);
-        WritePin.setDigitalValue(1);
+        pin1.setDigitalValue(1);
         for (volatile uint8_t i = 1; i < 6; i++);
     }
 
     void sendOne() {
-        WritePin.setDigitalValue(0);
+        pin1.setDigitalValue(0);
         for (volatile uint8_t i = 1; i < 1; i++);
-        WritePin.setDigitalValue(1);
+        pin1.setDigitalValue(1);
         for (volatile uint8_t i = 1; i < 80; i++);
     }
 
@@ -135,9 +134,9 @@ class microbitp : public MicroBitComponent
             delay1 = 75;
             delay2 = 6;
         }
-        WritePin.setDigitalValue(0);
+        pin1.setDigitalValue(0);
         for (uint8_t i = 1; i < delay1; i++);
-        WritePin.setDigitalValue(1);
+        pin1.setDigitalValue(1);
         for (uint8_t i = 1; i < delay2; i++);
     }
 
@@ -166,10 +165,10 @@ class microbitp : public MicroBitComponent
 
     int readBit() {
         volatile int i;
-        WritePin.setDigitalValue(0);
-        WritePin.setDigitalValue(1);
+        pin1.setDigitalValue(0);
+        pin1.setDigitalValue(1);
         for (i = 1; i < 20; i++);
-        int b = ReadPin.getDigitalValue();
+        int b = pin1.getDigitalValue();
         for (i = 1; i < 60; i++);
         return b;
     }
