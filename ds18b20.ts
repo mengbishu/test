@@ -10,7 +10,7 @@ namespace DS18B20 {
      * block="Temperature(C)"
      */
 
-     enum pin {
+     export enum pin {
        //% block=pin0
        pin0 = 0,
        //% block=pin1
@@ -18,6 +18,7 @@ namespace DS18B20 {
        //% block=pin2
        pin2 = 2
      }
+     
      
     //% shim=DS18B20::Temperature
     export function Temperature(p: number): number {
@@ -45,10 +46,16 @@ namespace DS18B20 {
         else if(y >= 10){
             z = x.toString() + '.' + y.toString()
         }
-        else if((y > -10)&&(y < 0)){
+        else if((y > -10)&&(y < 0)&&(x==0)){
+            z = '-' + x.toString() + '.0' + (-y).toString()
+        }
+        else if((y > -10)&&(y < 0)&&(x!=0)){
             z = x.toString() + '.0' + (-y).toString()
         }
-        else{
+        else if((y < -10)&&(x==0)){
+            z = '-' + x.toString() + '.' + (-y).toString()
+        }
+        else if((y < -10)&&(x!=0)){
             z = x.toString() + '.' + (-y).toString()
         }
         return z
