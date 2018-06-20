@@ -26,7 +26,7 @@ namespace DS18B20 {
     }
     
     //% weight=10 blockId="Temperature_number" 
-    //% block="Temperature_number | %p"
+    //% block="Temperature_number |%p"
     export function Temperature_number(p: pin): number {
         // Fake function for simulator
         return Temperature(p)
