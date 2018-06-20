@@ -23,7 +23,7 @@ namespace DS18B20 {
      * block="Temperature(C)"
      */
 
-    //% shim=DS1820::Temperature
+    //% shim=DS18B20::Temperature
     export function Temperature(): number {
         // Fake function for simulator
         return 0
