@@ -20,21 +20,21 @@ namespace DS18B20 {
      }
      
     //% shim=DS18B20::Temperature
-    export function Temperature(p : number): number {
+    export function Temperature(p: number): number {
         // Fake function for simulator
         return 0
     }
     
     //% weight=10 blockId="Temperature_number" 
-    //% block="Temperature_number %p"
-    export function Temperature_number(p : number): number {
+    //% block="Temperature_number |gg %p"
+    export function Temperature_number(p: pin): number {
         // Fake function for simulator
         return Temperature(p)
     }
     
     //% weight=10 blockId="Temperature_string" 
-    //% block="Temperature_string %p"
-    export function Temperature_string(p : pin) : string{
+    //% block="Temperature_string |%p"
+    export function Temperature_string(p: pin) : string{
         let temp = Temperature(p);
         let x = (temp / 100)
         let y = (temp % 100)
