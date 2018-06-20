@@ -185,7 +185,5 @@ class microbitp : public MicroBitComponent
 
         int16_t temp = (b2 << 8 | b1);
         return temp * 100 / 16;
-        
     }
- 
 }

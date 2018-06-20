@@ -22,11 +22,32 @@ namespace DS1820 {
      *temperature in hundreths of a degree centigrade. 
      * block="Temperature(C)"
      */
-    //% weight=10 blockId="DS1820_Temp" 
+
     //% shim=DS1820::Temperature
-    //% block="Temperature(C)"
     export function Temperature(): number {
         // Fake function for simulator
         return 0
+    }
+    
+    //% weight=10 blockId="DS1820_Temperature" 
+    //% block="Temperature(C)"
+    export function Temp() : string{
+        let temp = Temperature();
+        let x = (temp / 100)
+        let y = (temp % 100)
+        let z = ''
+        if((y < 10)&&(y >= 0)){
+            z = x.toString() + '.0' + y.toString()
+        }
+        else if(y >= 10){
+            z = x.toString() + '.' + y.toString()
+        }
+        else if((y > -10)&&(y < 0)){
+            z = x.toString() + '.0' + (-y).toString()
+        }
+        else{
+            z = x.toString() + '.' + (-y).toString()
+        }
+        return z
     }
 }
