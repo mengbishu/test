@@ -27,8 +27,8 @@ class microbitp : public MicroBitComponent
     }
 
     void disconnect(){ 
-        if (status & 0x01)
-            delete ((DigitalIn *)pin);
+//        if (status & 0x01)
+//            delete ((DigitalIn *)pin);
         if (status & 0x02)
             delete ((DigitalOut *)pin);
         this->pin = NULL;
@@ -148,7 +148,6 @@ class microbitp : public MicroBitComponent
 
     //%
     int16_t Temperature(int p) {
-        printf("in\n");
         switch(p){
           case 0: pin = pin0; break;
           case 1: pin = pin1; break;
@@ -161,7 +160,7 @@ class microbitp : public MicroBitComponent
           case 14: pin = pin14; break;
           case 15: pin = pin15; break;
           case 16: pin = pin16; break;
-          default: pin = pin0; 
+          default: pin = pin0;
         }
         init();
         writeByte(0xCC);
@@ -173,7 +172,6 @@ class microbitp : public MicroBitComponent
         int b2 = readByte();
 
         int16_t temp = (b2 << 8 | b1);
-        printf("out\n");
         return temp * 100 / 16;
     }
 }
