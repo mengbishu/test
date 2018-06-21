@@ -32,7 +32,6 @@ class microbitp : public MicroBitComponent
     }
 
     void disconnect(){
-        
         if (status & 0x01){
             delete ((DigitalIn *)pin);
         }
