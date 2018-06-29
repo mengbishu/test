@@ -31,8 +31,6 @@
 
 #include "MicroBit.h"
 #include "TimedInterruptIn.h"
-#include "nrf_gpio.h"
-#include "nrf_delay.h"
 #include <cstdio>
 #include <cmath>
 #include <vector>
@@ -42,7 +40,7 @@
 using namespace pxt;
 
 namespace DS18B20 {
-
+/*
   #define FAMILY_CODE address.rom[0]
   //#define FAMILY_CODE 0x28
   #define FAMILY_CODE_DS18S20 0x10 //9bit temp
@@ -75,18 +73,6 @@ namespace DS18B20 {
         invalid_conversion = -1000
     };
 
-    /** Create a one wire bus object connected to the specified pins
-     *
-     * The bus might either by regular powered or parasite powered. If it is parasite
-     * powered and power_pin is set, that pin will be used to switch an external mosfet
-     * connecting data to Vdd. If it is parasite powered and the pin is not set, the
-     * regular data pin is used to supply extra power when required. This will be
-     * sufficient as long as the number of devices is limited.
-     *
-     * @param data_pin DigitalInOut pin for the data bus
-     * @param power_pin DigitalOut (optional) pin to control the power MOSFET
-     * @param power_polarity bool (optional) which sets active state (0 for active low (default), 1 for active high)
-     */
     OneWire(PinName data_pin, PinName power_pin = NC, bool power_polarity = 0) : _datapin(data_pin),_parasitepin(power_pin) {
       _power_polarity = power_polarity;
       _power_mosfet = power_pin != NC;
@@ -96,9 +82,6 @@ namespace DS18B20 {
       found_addresses.clear();
     }
 
-    /**
-     * Initialise and determine if any devices are using parasitic power
-     */
     void init() {
       int byte_counter;
 
@@ -109,37 +92,16 @@ namespace DS18B20 {
       _parasite_power = !powerSupplyAvailable(address, true);
     }
 
-    /**
-     * Finds all one wire devices and returns the count
-     *
-     * @return - number of devices found
-     */
     int findAllDevicesOnBus() {
       while (searchRomFindNext()) {
       }
       return (int) found_addresses.size();
     }
 
-
-    /**
-     * Get address of devices previously found
-     *
-     * @param index the index into found devices
-     * @return the address of
-     */
     rom_address_t &getAddress(int index) {
       return found_addresses[index];
     }
 
-    /** This routine will initiate the temperature conversion within
-      * one or all temperature devices.
-      *
-      * @param wait if true or parasitic power is used, waits up to 750 ms for
-      * conversion otherwise returns immediately.
-      * @param address allows the function to apply to a specific device or
-      * to all devices on the 1-Wire bus.
-      * @returns milliseconds until conversion will complete.
-      */
     int convertTemperature(rom_address_t &address, bool wait, bool all) {
       // Convert temperature into scratchpad RAM for all devices at once
       int delay_time = 750; // Default delay time
@@ -183,16 +145,12 @@ namespace DS18B20 {
       }
       return delay_time;
     }
+*/
 
-    /** This function will return the temperature measured by the specific device.
-      *
-      * @param convertToFarenheight whether to convert the degC to farenheight
-      * @returns temperature for that scale, or OneWire::invalid_conversion (-1000) if CRC error detected.
-      */
-    int temperature(rom_address_t &address) {
-//      float answer, remaining_count, count_per_degree;
-      int reading = 0;
-      readScratchPad(address);
+//    int temperature(rom_address_t &address) {
+      //float answer, remaining_count, count_per_degree;
+//      int reading = 0;
+//      readScratchPad(address);
 /*      if (RAM_checksum_error()){
         // Indicate we got a CRC error
         answer = invalid_conversion;
@@ -224,16 +182,10 @@ namespace DS18B20 {
         }
       }
 */
-	  reading = (RAM[1] << 8) + RAM[0];
-      return reading*100/16;
-    }
-
-    /** This function sets the temperature resolution for supported devices
-      * in the configuration register.
-      *
-      * @param a number between 9 and 12 to specify resolution
-      * @returns true if successful
-      */
+//    reading = (RAM[1] << 8) + RAM[0];
+//      return reading*100/16;
+//    }
+/*
     bool setResolution(rom_address_t &address, unsigned int resolution) {
       bool answer = false;
       switch (FAMILY_CODE) {
@@ -254,11 +206,6 @@ namespace DS18B20 {
       return answer;
     }
 
-    /**
-     * Assuming a single device is attached, do a Read ROM
-     *
-     * @param ROM_address the address will be filled into this parameter
-     */
     void singleDeviceReadROM(rom_address_t &address) {
       if (!onewire_reset()) {
         return;
@@ -271,12 +218,6 @@ namespace DS18B20 {
       }
     }
 
-    /**
-     * Static utility method for easy conversion from previously stored addresses
-     *
-     * @param hexAddress the address as a human readable hex string
-     * @return
-     */
     static rom_address_t addressFromHex(const char *hexAddress) {
       rom_address_t address = rom_address_t();
       for (uint8_t i = 0; i < sizeof(address.rom); i++) {
@@ -449,7 +390,7 @@ namespace DS18B20 {
       return_value = false;
       while (!DS1820_done_flag) {
         if (!onewire_reset()) {
-          uBit.serial.printf("Failed to reset one wire bus\n");
+          //uBit.serial.printf("Failed to reset one wire bus\n");
           return false;
         } else {
           ROM_bit_index = 1;
@@ -463,7 +404,7 @@ namespace DS18B20 {
             if (Bit_A & Bit_B) {
               descrepancyMarker = 0; // data read error, this should never happen
               ROM_bit_index = 0xFF;
-              uBit.serial.printf("Data read error - no devices on bus?\r\n");
+              //uBit.serial.printf("Data read error - no devices on bus?\r\n");
             } else {
               if (Bit_A | Bit_B) {
                 // Set ROM bit to Bit_A
@@ -502,7 +443,7 @@ namespace DS18B20 {
             while (1) {
               if (i >= found_addresses.size()) {                             //End of list, or empty list
                 if (ROM_checksum_error(DS1820_search_ROM)) {          // Check the CRC
-                  uBit.serial.printf("failed crc\r\n");
+                  //uBit.serial.printf("failed crc\r\n");
                   return false;
                 }
                 rom_address_t address;
@@ -565,10 +506,12 @@ namespace DS18B20 {
       return onewire_bit_in();
     }
   };
+*/
   //MicroBit uBit;
+  MicroBitPin pin = uBit.io.P0;
   //%
   int16_t Temperature(int p) {
-    MicroBitPin pin = uBit.io.P0;
+    
     switch(p){
       case 0: pin = uBit.io.P0; break;
       case 1: pin = uBit.io.P1; break;
@@ -583,28 +526,14 @@ namespace DS18B20 {
       case 16: pin = uBit.io.P16; break;
       default: pin = uBit.io.P0;
     }
-    OneWire oneWire(pin.name);
-    oneWire.init();
-    oneWire.findAllDevicesOnBus();
-    rom_address_t address;
-    oneWire.singleDeviceReadROM(address);
-    oneWire.convertTemperature(address, true, true); //Start temperature conversion, wait until ready
-    return oneWire.temperature(address);
+    
+//    OneWire oneWire(pin.name);
+//    oneWire.init();
+//    oneWire.findAllDevicesOnBus();
+//    rom_address_t address;
+//    oneWire.singleDeviceReadROM(address);
+//    oneWire.convertTemperature(address, true, true);
+//    return oneWire.temperature(address);
+    return 0;
   }
-
-/*
-  int main() {
-    oneWire.init();
-    oneWire.findAllDevicesOnBus();
-    rom_address_t address;
-    oneWire.singleDeviceReadROM(address);
-    while(1) {
-      oneWire.convertTemperature(address, true, true); //Start temperature conversion, wait until ready
-      printf("%d\n", (int)oneWire.temperature(address));
-    }
-  
-    while(1){
-      printf("temp:%d\n",Temperature(12));
-    }
-  }*/
 }
