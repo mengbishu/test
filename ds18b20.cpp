@@ -28,8 +28,8 @@
  * THE SOFTWARE.
  */
 
-
 #include "MicroBit.h"
+#include "pxt.h"
 #include "TimedInterruptIn.h"
 #include <cstdio>
 #include <cmath>
@@ -534,6 +534,7 @@ namespace DS18B20 {
 //    oneWire.singleDeviceReadROM(address);
 //    oneWire.convertTemperature(address, true, true);
 //    return oneWire.temperature(address);
+    printf("%d\n",pin.name);
     return 0;
   }
 }
